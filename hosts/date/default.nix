@@ -4,7 +4,6 @@
 
 {
   config,
-  lib,
   pkgs,
   ...
 }:
@@ -24,8 +23,10 @@
   ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
 
   # systemd stage-1 loader (required for swraid)
   boot.initrd.systemd.enable = true;
