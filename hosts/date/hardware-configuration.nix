@@ -22,6 +22,7 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+  boot.kernelParams = [ "boot.shell_on_fail" ];  
 
   # Software RAID
   boot.swraid = {

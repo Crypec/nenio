@@ -24,6 +24,8 @@
     efi.canTouchEfiVariables = true;
   };
 
+  boot.blacklistedKernelModules = ["efivarfs"];
+
   # systemd stage-1 loader (required for swraid)
   boot.initrd.systemd.enable = true;
 
@@ -44,10 +46,10 @@
   # Environment variables 
 
   # Force wayland when possible 
-  # environment.sessionVariables.NIXOS_OZONE_WL = "1"; 
+  environment.sessionVariables.NIXOS_OZONE_WL = "1"; 
 
   # Fix disappearing cursor on Hyprland 
-  # environment.sessionVariables.WLR_NO_HARDWARE_CURSORS = "1"; 
+  environment.sessionVariables.WLR_NO_HARDWARE_CURSORS = "1"; 
 
   hardware = {
     graphics = {

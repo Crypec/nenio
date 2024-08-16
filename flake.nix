@@ -7,11 +7,11 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # nix-colors.url = "github:misterio77/nix-colors";
+    stylix.url = "github:danth/stylix";
   };
 
   outputs =
-    inputs@{ nixpkgs, home-manager, ... }:
+    inputs@{ nixpkgs, home-manager, stylix, ... }:
     {
       nixosConfigurations = {
         date = nixpkgs.lib.nixosSystem {
@@ -19,6 +19,7 @@
           modules = [
             ./hosts/date
             home-manager.nixosModules.home-manager
+            stylix.nixosModules.stylix
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
