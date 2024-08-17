@@ -132,7 +132,7 @@
     wdisplays
     strawberry
     signal-desktop-beta
-    gurk-rs
+    # gurk-rs
   ];
 
   home.sessionVariables = {

@@ -60,7 +60,7 @@
       enable = true;
       extraPackages = with pkgs; [
         # trying to fix `WLR_RENDERER=vulkan` in sway
-        vulkan-validation-layers
+        # vulkan-validation-layers
       ];
     };
     nvidia = {
