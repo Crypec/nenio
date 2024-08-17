@@ -11,7 +11,12 @@
   };
 
   outputs =
-    inputs@{ nixpkgs, home-manager, stylix, ... }:
+    inputs@{
+      nixpkgs,
+      home-manager,
+      stylix,
+      ...
+    }:
     {
       nixosConfigurations = {
         date = nixpkgs.lib.nixosSystem {
