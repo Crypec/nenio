@@ -3,10 +3,12 @@
 {
 
   imports = [
-    ./sway
-    ./firefox
     ./alacritty
     ./helix
+    ./shell
+
+    ./sway
+    ./firefox
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -14,6 +16,8 @@
   home = {
     username = "simon";
     homeDirectory = "/home/simon";
+
+    shell = pkgs.nushell;
 
     packages = with pkgs; [ ];
   };
@@ -33,6 +37,5 @@
   # the Home Manager release notes for a list of state version
   # changes in each release.
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "24.05";
-
+  home.stateVersion = "24.11";
 }
