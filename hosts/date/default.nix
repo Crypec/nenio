@@ -51,26 +51,26 @@
   # Fix disappearing cursor on Hyprland 
   environment.sessionVariables.WLR_NO_HARDWARE_CURSORS = "1";
 
-  hardware = {
-    graphics = {
+  # hardware = {
+  #   graphics = {
 
-      # driSupport = true; 
-      # driSupport32Bit = true; 
+  #     # driSupport = true; 
+  #     # driSupport32Bit = true; 
 
-      enable = true;
-      extraPackages = with pkgs; [
-        # trying to fix `WLR_RENDERER=vulkan` in sway
-        # vulkan-validation-layers
-      ];
-    };
-    nvidia = {
-      modesetting.enable = true;
-      powerManagement.enable = false;
-      powerManagement.finegrained = false;
-      open = true;
-      package = config.boot.kernelPackages.nvidiaPackages.production;
-    };
-  };
+  #     enable = true;
+  #     extraPackages = with pkgs; [
+  #       # trying to fix `WLR_RENDERER=vulkan` in sway
+  #       # vulkan-validation-layers
+  #     ];
+  #   };
+  #   nvidia = {
+  #     modesetting.enable = true;
+  #     powerManagement.enable = false;
+  #     powerManagement.finegrained = false;
+  #     open = true;
+  #     package = config.boot.kernelPackages.nvidiaPackages.production;
+  #   };
+  # };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -127,5 +127,5 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "unstable"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 }
