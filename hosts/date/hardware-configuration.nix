@@ -25,12 +25,21 @@
   boot.kernelParams = [ "boot.shell_on_fail" ];
 
   # Software RAID
-  boot.swraid = {
-    enable = true;
+  # boot.swraid = {
+  #   enable = true;
 
-    mdadmConf = ''
-      ARRAY /dev/md0 level=raid1 num-devices=2 metadata=1.2 UUID=363d2583:3d7916b0:9994ddf9:e8ad978d devices=/dev/nvme0n1p2,/dev/nvme1n1p2
-    '';
+  #   mdadmConf = ''
+  #     ARRAY /dev/md0 level=raid1 num-devices=2 metadata=1.2 UUID=363d2583:3d7916b0:9994ddf9:e8ad978d devices=/dev/nvme0n1p2,/dev/nvme1n1p2
+  #   '';
+  # };
+
+  boot.initrd = {
+    services.swraid = {
+      enable = true;
+      mdadmConf = ''
+        ARRAY /dev/md0 level=raid1 num-devices=2 metadata=1.2 UUID=363d2583:3d7916b0:9994ddf9:e8ad978d devices=/dev/nvme0n1p2,/dev/nvme1n1p2
+      '';
+      };
   };
 
   fileSystems."/" = {

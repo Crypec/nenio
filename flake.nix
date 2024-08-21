@@ -2,7 +2,7 @@
   description = "nenio: ctx's NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/master";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";

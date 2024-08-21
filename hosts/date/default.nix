@@ -27,7 +27,13 @@
   # boot.blacklistedKernelModules = ["efivarfs"];
 
   # systemd stage-1 loader (required for swraid)
-  boot.initrd.systemd.enable = true;
+
+  boot.initrd = {
+    enable = true;
+    systemd.emergencyAccess = true;
+  };
+
+  # boot.initrd.systemd.enable = true;
 
   networking.hostName = "date"; # Define your hostname.
 
