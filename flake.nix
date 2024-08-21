@@ -2,7 +2,7 @@
   description = "nenio: ctx's NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-24.05";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -30,7 +30,7 @@
               home-manager.useUserPackages = true;
 
               home-manager.extraSpecialArgs = inputs;
-              home-manager.users.simon = import ./home;
+              # home-manager.users.simon = import ./home;
 
               # Optionally, use home-manager.extraSpecialArgs to pass
               # arguments to home.nix

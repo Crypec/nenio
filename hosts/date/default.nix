@@ -5,7 +5,6 @@
 { config, pkgs, ... }:
 
 {
-
   # Enable experimental features for Nix
   nix.settings.experimental-features = [
     "nix-command"
@@ -19,10 +18,18 @@
   ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_zen;
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    # initrd = {
+    #   enabled = true;
+    #   systemd.EmergencyAccess = true;
+    # };
   };
+
 
   # boot.blacklistedKernelModules = ["efivarfs"];
 
@@ -47,7 +54,7 @@
   nixpkgs.config.allowUnfree = true;
 
   services.fstrim.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
+  # services.xserver.videoDrivers = [ "nvidia" ];
 
   # Environment variables 
 
@@ -58,7 +65,7 @@
   environment.sessionVariables.WLR_NO_HARDWARE_CURSORS = "1";
 
   hardware = {
-    graphics = {
+    opengl = {
 
       # driSupport = true; 
       # driSupport32Bit = true; 
@@ -66,16 +73,16 @@
       enable = true;
       extraPackages = with pkgs; [
         # trying to fix `WLR_RENDERER=vulkan` in sway
-        # vulkan-validation-layers
+        vulkan-validation-layers
       ];
     };
-    nvidia = {
-      modesetting.enable = true;
-      powerManagement.enable = false;
-      powerManagement.finegrained = false;
-      open = true;
-      package = config.boot.kernelPackages.nvidiaPackages.production;
-    };
+    # nvidia = {
+    #   modesetting.enable = true;
+    #   powerManagement.enable = false;
+    #   powerManagement.finegrained = false;
+    #   open = true;
+    #   package = config.boot.kernelPackages.nvidiaPackages.production;
+    # };
   };
 
   # Configure network proxy if necessary
@@ -133,5 +140,5 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "unstable"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 }
