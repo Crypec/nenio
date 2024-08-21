@@ -6,10 +6,10 @@
 
 {
   # Enable experimental features for Nix
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  # nix.settings.experimental-features = [
+  #   "nix-command"
+  #   "flakes"
+  # ];
 
   imports = [
     # Include the results of the hardware scan.
@@ -21,15 +21,17 @@
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
     loader = {
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+        consoleMode = "max";
+      };
       efi.canTouchEfiVariables = true;
     };
     # initrd = {
     #   enabled = true;
-    #   systemd.EmergencyAccess = true;
+    #   systemd.emergencyAccess = true;
     # };
   };
-
 
   # boot.blacklistedKernelModules = ["efivarfs"];
 
@@ -140,5 +142,5 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "unstable"; # Did you read the comment?
 }
