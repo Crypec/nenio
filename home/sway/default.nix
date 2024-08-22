@@ -125,7 +125,6 @@
     tofi
     alacritty
     thunderbird
-    librewolf
     firefox
     chromium
     wl-clipboard

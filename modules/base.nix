@@ -11,7 +11,7 @@ in
   # use a new reworked configuration switcher
   system.switch = {
     enable = false;
-    enableNg = true; 
+    enableNg = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -31,7 +31,6 @@ in
       thunderbird
       neomutt
       firefox
-      librewolf
       chromium
       strawberry
       signal-desktop-beta

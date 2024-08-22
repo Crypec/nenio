@@ -8,7 +8,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/system.nix
+    ../../modules/base.nix
   ];
 
   networking.hostName = "date"; # Define your hostname.
@@ -48,10 +48,13 @@
   # Environment variables 
 
   # Force wayland when possible 
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    WLR_RENDERER = "vulkan";
+  };
 
   # Fix disappearing cursor on Hyprland 
-  environment.sessionVariables.WLR_NO_HARDWARE_CURSORS = "1";
 
   hardware = {
     graphics = {
