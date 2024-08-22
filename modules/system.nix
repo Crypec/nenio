@@ -25,7 +25,7 @@ in
       librewolf
       chromium
       strawberry
-      signal-desktop
+      signal-desktop-beta
     ];
   };
 
@@ -55,19 +55,6 @@ in
   #   options = lib.mkDefault "--delete-older-than 31d";
   # };
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # systemd stage-1 loader (required for swraid)
-  boot.initrd.systemd.enable = true;
-
-  networking.hostName = "date"; # Define your hostname.
-
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
-
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
@@ -85,9 +72,6 @@ in
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-
-  # Enable CUPS to print documents.
-  services.printing.enable = false;
 
   fonts = {
     packages = with pkgs; [
@@ -112,7 +96,7 @@ in
     ];
 
     # use fonts specified by user rather than default ones
-    enableDefaultPackages = false;
+    enableDefaultPackages = true;
 
     # user defined fonts
     # the reason there's Noto Color Emoji everywhere is to override DejaVu's
