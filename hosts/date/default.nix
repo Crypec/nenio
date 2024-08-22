@@ -5,17 +5,13 @@
 { config, pkgs, ... }:
 
 {
-  # Enable experimental features for Nix
-  # nix.settings.experimental-features = [
-  #   "nix-command"
-  #   "flakes"
-  # ];
-
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../modules/system.nix
   ];
+
+  networking.hostName = "date"; # Define your hostname.
 
   # Use the systemd-boot EFI boot loader.
   boot = {
@@ -23,28 +19,18 @@
     loader = {
       systemd-boot = {
         enable = true;
-        consoleMode = "max";
+        # consoleMode = "max";
       };
       efi.canTouchEfiVariables = true;
     };
-    # initrd = {
-    #   enabled = true;
-    #   systemd.emergencyAccess = true;
-    # };
+    initrd = {
+      enable = true;
+      systemd = {
+        enable = true;
+        emergencyAccess = true;
+      };
+    };
   };
-
-  # boot.blacklistedKernelModules = ["efivarfs"];
-
-  # systemd stage-1 loader (required for swraid)
-
-  boot.initrd = {
-    enable = true;
-    systemd.emergencyAccess = true;
-  };
-
-  # boot.initrd.systemd.enable = true;
-
-  networking.hostName = "date"; # Define your hostname.
 
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -56,7 +42,8 @@
   nixpkgs.config.allowUnfree = true;
 
   services.fstrim.enable = true;
-  # services.xserver.videoDrivers = [ "nvidia" ];
+
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   # Environment variables 
 
@@ -67,7 +54,7 @@
   environment.sessionVariables.WLR_NO_HARDWARE_CURSORS = "1";
 
   hardware = {
-    opengl = {
+    graphics = {
 
       # driSupport = true; 
       # driSupport32Bit = true; 
@@ -78,13 +65,13 @@
         vulkan-validation-layers
       ];
     };
-    # nvidia = {
-    #   modesetting.enable = true;
-    #   powerManagement.enable = false;
-    #   powerManagement.finegrained = false;
-    #   open = true;
-    #   package = config.boot.kernelPackages.nvidiaPackages.production;
-    # };
+    nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = false;
+      open = true;
+      package = config.boot.kernelPackages.nvidiaPackages.production;
+    };
   };
 
   # Configure network proxy if necessary

@@ -5,6 +5,15 @@ in
 {
   # ============================= User related =============================
 
+  # use the much newer nftables instead of the old iptables
+  networking.nftables.enable = true;
+
+  # use a new reworked configuration switcher
+  system.switch = {
+    enable = false;
+    enableNg = true; 
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.simon = {
     isNormalUser = true;
