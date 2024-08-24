@@ -6,7 +6,11 @@
 }:
 
 {
-  imports = [ ../tofi ];
+  imports = [
+    ../../modules/gui
+
+    ../tofi
+  ];
 
   wayland.windowManager.sway = {
     enable = true;
@@ -100,6 +104,39 @@
         smartGaps = false;
       };
 
+      output = {
+        HDMI-A-1 = {
+          mode = "1920x1080@144.001Hz";
+          pos = "3445 1178";
+          transform = "270";
+          scale = "1.0";
+          scale_filter = "smart";
+          adaptive_sync = "off";
+          dpms = "on";
+        };
+        DP-2 = {
+          mode = "1920x1080@390.297Hz";
+          pos = "445 1178";
+          transform = "270";
+          scale = "1.0";
+          scale_filter = "smart";
+          adaptive_sync = "off";
+          dpms = "on";
+        };
+        DP-3 = {
+          mode = "1920x1080@360.0Hz";
+          pos = "1525 1737";
+          transform = "normal";
+          scale = "1.0";
+          scale_filter = "smart";
+          adaptive_sync = "off";
+          dpms = "on";
+        };
+      };
+
+      # workspaceOutputAssign = { 
+      # };
+
       # # Set variables
       # variables = {
       #   drun = "tofi-drun --drun-launch=true";
@@ -132,11 +169,30 @@
     strawberry
     signal-desktop-beta
     # gurk-rs
+
+    # waypipe # forward application over ssh
+    wdisplays # graphical output manager
+    # wev # wayland event monitor
+    wl-clipboard # cli tool to manage wayland clipboard
+    wl-mirror # emulation for “mirror display” mode
+    wlr-randr # output management that actually works
   ];
 
   home.sessionVariables = {
     XDG_CURRENT_DESKTOP = "sway";
     WLR_RENDERER = "vulkan";
+
     _JAVA_AWT_WM_NONREPARENTING = 1;
+    _JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=on";
+
+    CLUTTER_BACKEND = "wayland";
+    GDK_BACKEND = "wayland";
+    GDK_DPI_SCALE = 1;
+    MOZ_ENABLE_WAYLAND = 1;
+    NIXOS_OZONE_WL = 1;
+    QT_QPA_PLATFORM = "wayland-egl";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = 1;
+    SDL_VIDEODRIVER = "wayland";
+    WLR_NO_HARDWARE_CURSORS = 1;
   };
 }

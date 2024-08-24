@@ -23,6 +23,7 @@
           system = "x86_64-linux";
           modules = [
             ./hosts/date
+            ./modules/gui
             home-manager.nixosModules.home-manager
             stylix.nixosModules.stylix
             {
@@ -31,12 +32,23 @@
 
               home-manager.extraSpecialArgs = inputs;
               home-manager.users.simon = import ./home;
-
-              # Optionally, use home-manager.extraSpecialArgs to pass
-              # arguments to home.nix
             }
           ];
-          # specialArgs = { inherit nix-colors; };
+        };
+        late = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/date
+            home-manager.nixosModules.home-manager
+            stylix.nixosModules.stylix
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+
+              home-manager.extraSpecialArgs = inputs;
+              home-manager.users.simon = import ./home;
+            }
+          ];
         };
       };
     };

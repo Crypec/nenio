@@ -57,6 +57,8 @@
   # Fix disappearing cursor on Hyprland 
 
   hardware = {
+    enableRedistributableFirmware = true;
+
     graphics = {
 
       # driSupport = true; 
