@@ -1,4 +1,9 @@
-{ pkgs, inputs, stylix, ... }:
+{
+  pkgs,
+  inputs,
+  stylix,
+  ...
+}:
 {
   stylix = {
     enable = true;

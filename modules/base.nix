@@ -29,7 +29,7 @@ in
     packages = with pkgs; [
       alacritty
       eza
-     
+
       jujutsu
       tree
       thunderbird

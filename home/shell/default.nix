@@ -9,6 +9,20 @@
     nushell = {
       enable = true;
 
+      # configFile.text = "
+      #   show_banner: false
+      # ";
+
+      configFile = {
+        text = ''
+          let $config = {
+            filesize_metric: true
+            table_mode: with-love
+            use_ls_colors: true
+          }
+        '';
+      };
+
       shellAliases = {
         vi = "hx";
         vim = "hx";

@@ -15,7 +15,11 @@
 
       shell = {
         program = "${pkgs.zellij}/bin/zellij";
-        args = "";
+        args = [
+          "options"
+          "--default-shell"
+          "${pkgs.nushell}/bin/nu"
+        ];
       };
 
       keyboard.bindings = [
