@@ -6,11 +6,7 @@
 }:
 
 {
-  imports = [
-    ../../modules/gui
-
-    ../tofi
-  ];
+  imports = [ ../tofi ];
 
   wayland.windowManager.sway = {
     enable = true;
