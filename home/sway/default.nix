@@ -147,7 +147,7 @@
       terminal = "alacritty";
       startup = [
         # Launch Firefox on start
-        # { command = "firefox"; }
+        { command = "swaybg -m fill -i ${../../misc/wallpapers/ringstrasse.jpg}"; }
       ];
 
     };
@@ -155,7 +155,9 @@
   };
 
   home.packages = with pkgs; [
+    swaybg
     tofi
+  
     alacritty
     thunderbird
     firefox

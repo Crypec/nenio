@@ -17,6 +17,11 @@
     username = "simon";
     homeDirectory = "/home/simon";
 
+    sessionVariables = rec {
+      EDITOR = "hx";
+      GIT_EDITOR = EDITOR;
+    };
+
     packages = with pkgs; [ ];
   };
 
