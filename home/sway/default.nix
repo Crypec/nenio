@@ -94,9 +94,9 @@
       window.border = 5;
       focus.followMouse = true;
       gaps = {
-        outer = 5;
+        outer = 3;
         inner = 5;
-        smartBorders = "off";
+        smartBorders = "on";
         smartGaps = false;
       };
 
@@ -130,6 +130,8 @@
         };
       };
 
+      # defaultWorkspace = "2";
+
       # workspaceOutputAssign = { 
       # };
 
@@ -151,13 +153,19 @@
       ];
 
     };
-    extraConfig = "default_border pixel 2";
+    extraConfig = "
+      default_border pixel 2
+      focus outut DP-3
+      for_window [class='.*'] split toggle
+      for_window [app_id='.*'] split toggle
+      # default_orientation vertical
+    ";
   };
 
   home.packages = with pkgs; [
     swaybg
     tofi
-  
+
     alacritty
     thunderbird
     firefox
@@ -177,7 +185,10 @@
   ];
 
   home.sessionVariables = {
+    XDG_SESSION_TYPE = "wayland";
+    XDG_SESSION_DESKTOP = "sway";
     XDG_CURRENT_DESKTOP = "sway";
+
     WLR_RENDERER = "vulkan";
 
     _JAVA_AWT_WM_NONREPARENTING = 1;
@@ -186,9 +197,13 @@
     CLUTTER_BACKEND = "wayland";
     GDK_BACKEND = "wayland";
     GDK_DPI_SCALE = 1;
+
     MOZ_ENABLE_WAYLAND = 1;
+
     NIXOS_OZONE_WL = 1;
-    QT_QPA_PLATFORM = "wayland-egl";
+
+    QT_QPA_PLATFORM = "wayland";
+
     QT_WAYLAND_DISABLE_WINDOWDECORATION = 1;
     SDL_VIDEODRIVER = "wayland";
     WLR_NO_HARDWARE_CURSORS = 1;

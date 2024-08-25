@@ -57,11 +57,11 @@ in
   };
 
   # do garbage collection weekly to keep disk usage low
-  # nix.gc = {
-  #   automatic = lib.mkDefault true;
-  #   dates = lib.mkDefault "weekly";
-  #   options = lib.mkDefault "--delete-older-than 31d";
-  # };
+  nix.gc = {
+    automatic = lib.mkDefault true;
+    dates = lib.mkDefault "weekly";
+    options = lib.mkDefault "--delete-older-than 31d";
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
