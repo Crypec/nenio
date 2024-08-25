@@ -1,7 +1,5 @@
 { pkgs, inputs, stylix, ... }:
 {
-  programs.enable.stylix = true;
-
   stylix = {
     enable = true;
     autoEnable = true;

@@ -23,6 +23,8 @@
           system = "x86_64-linux";
           modules = [
             ./hosts/date
+            ./modules/gui.nix
+            ./modules/stylix
             home-manager.nixosModules.home-manager
             stylix.nixosModules.stylix
             {
