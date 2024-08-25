@@ -3,7 +3,7 @@
   stylix = {
     enable = true;
     autoEnable = true;
-    # image = "${../../misc/wallpapers/ringstrasse.jpg}";
+    image = ../../misc/wallpapers/ringstrasse.jpg;
 
     fonts = {
       monospace = {
