@@ -31,7 +31,7 @@
 
             nixos-hardware.nixosModules.msi-b550-a-pro
             home-manager.nixosModules.home-manager
-            stylix.homeManagerModules.stylix
+            stylix.nixosModules.stylix
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;

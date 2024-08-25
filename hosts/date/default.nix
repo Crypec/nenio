@@ -11,7 +11,13 @@
     ../../modules/base.nix
   ];
 
-  networking.hostName = "date"; # Define your hostname.
+  networking = {
+    hostName = "date";
+    networkmanager = {
+      enable = true;
+      wifi.backend = "iwd";
+    };
+  };
 
   # Use the systemd-boot EFI boot loader.
   boot = {
@@ -19,7 +25,6 @@
     loader = {
       systemd-boot = {
         enable = true;
-        consoleMode = "max";
       };
       efi.canTouchEfiVariables = true;
     };
@@ -34,7 +39,6 @@
 
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -74,7 +78,7 @@
       modesetting.enable = true;
       powerManagement.enable = false;
       powerManagement.finegrained = false;
-      open = true;
+      open = false;
       package = config.boot.kernelPackages.nvidiaPackages.production;
     };
   };

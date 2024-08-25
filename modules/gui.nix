@@ -13,4 +13,6 @@
       };
     };
   };
+
+  programs.dconf.enable = true;
 }
