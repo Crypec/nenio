@@ -19,6 +19,8 @@ in
     isNormalUser = true;
     description = "Simon";
 
+    shell = pkgs.nushell;
+
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -26,6 +28,8 @@ in
 
     packages = with pkgs; [
       alacritty
+      eza
+     
       jujutsu
       tree
       thunderbird

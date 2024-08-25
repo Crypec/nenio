@@ -48,6 +48,8 @@
 
               home-manager.extraSpecialArgs = inputs;
               home-manager.users.simon = import ./home;
+
+              home-manager.backupFileExtension = "hm.bk";
             }
           ];
         };

@@ -6,15 +6,15 @@
 
   # alacritty - a cross-platform, GPU-accelerated terminal emulator
   programs = {
-    # nushell = {
-    #   enable = true;
+    nushell = {
+      enable = true;
 
-    #   shellAliases = {
-    #     vi = "hx";
-    #     vim = "hx";
-    #     nano = "hx";
-    #   };
-    # };
+      shellAliases = {
+        vi = "hx";
+        vim = "hx";
+        nano = "hx";
+      };
+    };
 
     # carapace = {
     #   enable = true;
