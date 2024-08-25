@@ -8,16 +8,10 @@
     settings = {
       font = "Comic Mono";
       font-size = 11;
-      text-color = "#FFFFFF";
-      prompt-color = "#FFFFFF";
-      prompt-background = "#110855";
       prompt-background-padding = "8, 12";
       prompt-background-corner-radius = 10;
-      selection-color = "#FFFFFF";
-      selection-background = "#553355";
       selection-background-padding = "8, 12";
       selection-background-corner-radius = 10;
-      selection-match-color = "#EE33EE";
       prompt-text = "Run:";
       prompt-padding = 22;
       placeholder-text = "Application";
@@ -30,7 +24,6 @@
       background-color = "#111111";
       outline-width = 0;
       border-width = 5;
-      border-color = "#999999";
       corner-radius = 30;
       clip-to-padding = false;
       padding-top = 13;
@@ -42,8 +35,10 @@
       auto-accept-single = true;
     };
   };
+
+  # https://github.com/philj56/tofi/issues/115#issuecomment-1701748297
+  # rebuild tofi cache after every home-manager reload, such that it can find all applications
   home.activation = {
-    # https://github.com/philj56/tofi/issues/115#issuecomment-1701748297
     regenerateTofiCache = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       tofi_cache=${config.xdg.cacheHome}/tofi-drun
       [[ -f "$tofi_cache" ]] && rm "$tofi_cache"
