@@ -6,7 +6,6 @@
     ./alacritty
     ./helix
     ./shell
-    ./stylix
 
     ./sway
     ./firefox
