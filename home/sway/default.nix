@@ -208,4 +208,6 @@
     SDL_VIDEODRIVER = "wayland";
     WLR_NO_HARDWARE_CURSORS = 1;
   };
+
+  programs.dconf.enbable = true;
 }

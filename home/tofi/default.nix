@@ -9,9 +9,9 @@
       hide-cursor = true;
       text-cursor = true;
       history = true;
-      fuzzy-match = false;
+      fuzzy-match = true;
       require-match = true;
-      auto-accept-single = false;
+      auto-accept-single = true;
       hide-input = false;
       hidden-character = "*";
       drun-launch = false;

@@ -5,6 +5,8 @@ in
 {
   # ============================= User related =============================
 
+  programs.dconf.enbale = true;
+
   # use the much newer nftables instead of the old iptables
   networking.nftables.enable = true;
 
@@ -129,8 +131,6 @@ in
       emoji = [ "Noto Color Emoji" ];
     };
   };
-
-  # programs.dconf.enable = true;
 
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

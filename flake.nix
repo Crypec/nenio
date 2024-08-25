@@ -8,6 +8,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     stylix.url = "github:danth/stylix";
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs =
@@ -15,6 +17,7 @@
       nixpkgs,
       home-manager,
       stylix,
+      nixos-hardware,
       ...
     }:
     {
@@ -25,8 +28,10 @@
             ./hosts/date
             ./modules/gui.nix
             ./modules/stylix
+
+            nixos-hardware.nixosModules.msi-b550-a-pro
             home-manager.nixosModules.home-manager
-            stylix.nixosModules.stylix
+            stylix.homeManagerModules.stylix
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;

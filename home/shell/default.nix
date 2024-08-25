@@ -15,10 +15,8 @@
 
       configFile = {
         text = ''
-          let $config = {
-            filesize_metric: true
-            table_mode: with-love
-            use_ls_colors: true
+          $env.config = {
+            show_banner: false,
           }
         '';
       };
