@@ -27,7 +27,7 @@
             "Nix Packages" = {
               urls = [
                 {
-                  template = "https://search.nixos.org/packages";
+                  template = "https://sx.nixos.org/packages";
                   params = [
                     {
                       name = "type";
