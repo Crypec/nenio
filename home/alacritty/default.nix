@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
 
@@ -12,6 +12,11 @@
       env.TERM = "xterm-256color";
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
+
+      shell = {
+        program = "${pkgs.zellij}/bin/zellij";
+        args = "";
+      };
 
       keyboard.bindings = [
         {
