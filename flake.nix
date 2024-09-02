@@ -2,22 +2,40 @@
   description = "nenio: ctx's NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/master";
 
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    # home-manager.url = "github:nix-community/home-manager";
+    # home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    stylix.url = "github:danth/stylix";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+
+      # optionally choose not to download darwin deps (saves some resources on Linux)
+      inputs.darwin.follows = "";
+    };
+
   };
 
   outputs =
     inputs@{
       nixpkgs,
-      home-manager,
-      stylix,
       nixos-hardware,
+      home-manager,
+      agenix,
+      stylix,
       ...
     }:
     {
@@ -29,10 +47,13 @@
             ./modules/gui.nix
             ./modules/stylix
 
+            agenix.nixosModules.default
             nixos-hardware.nixosModules.msi-b550-a-pro
             home-manager.nixosModules.home-manager
             stylix.nixosModules.stylix
             {
+
+            programs.dconf.enable = true;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 

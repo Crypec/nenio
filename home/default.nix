@@ -1,7 +1,6 @@
 { pkgs, ... }:
 
 {
-
   imports = [
     ./alacritty
     ./helix
@@ -10,6 +9,14 @@
     ./sway
     ./firefox
   ];
+
+  # Let Home Manager install and manage itself.
+  programs.home-manager = {
+    enable = true;
+  };
+
+  # Nicely reload system units when changing configs
+  systemd.user.startServices = "sd-switch";
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -24,14 +31,6 @@
 
     packages = with pkgs; [ ];
   };
-
-  # Let Home Manager install and manage itself.
-  programs.home-manager = {
-    enable = true;
-  };
-
-  # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

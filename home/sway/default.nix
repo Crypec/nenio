@@ -102,7 +102,7 @@
 
       output = {
         HDMI-A-1 = {
-          mode = "1920x1080@144.001Hz";
+          mode = "1920x1080@119.982Hz";
           pos = "3445 1178";
           transform = "270";
           scale = "1.0";
@@ -112,17 +112,17 @@
         };
         DP-2 = {
           mode = "1920x1080@390.297Hz";
-          pos = "445 1178";
-          transform = "270";
+          pos = "1525 1745";
+          transform = "normal";
           scale = "1.0";
           scale_filter = "smart";
           adaptive_sync = "off";
           dpms = "on";
         };
-        DP-3 = {
+        DP-1 = {
           mode = "1920x1080@360.0Hz";
-          pos = "1525 1737";
-          transform = "normal";
+          pos = "445 1178";
+          transform = "270";
           scale = "1.0";
           scale_filter = "smart";
           adaptive_sync = "off";
@@ -163,7 +163,7 @@
   };
 
   home.packages = with pkgs; [
-    swaybg
+    # swaybg
     tofi
 
     alacritty
@@ -177,11 +177,11 @@
     # gurk-rs
 
     # waypipe # forward application over ssh
-    wdisplays # graphical output manager
+    # wdisplays # graphical output manager
     # wev # wayland event monitor
     wl-clipboard # cli tool to manage wayland clipboard
-    wl-mirror # emulation for “mirror display” mode
-    wlr-randr # output management that actually works
+    # wl-mirror # emulation for “mirror display” mode
+    # wlr-randr # output management that actually works
   ];
 
   home.sessionVariables = {

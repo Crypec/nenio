@@ -14,12 +14,12 @@
       selection.save_to_clipboard = true;
 
       shell = {
-        program = "${pkgs.zellij}/bin/zellij";
-        args = [
-          "options"
-          "--default-shell"
-          "${pkgs.nushell}/bin/nu"
-        ];
+        program = "${pkgs.nushell}/bin/nu";
+        # args = [
+        #   "options"
+        #   "--default-shell"
+        #   "${pkgs.nushell}/bin/nu"
+        # ];
       };
 
       keyboard.bindings = [

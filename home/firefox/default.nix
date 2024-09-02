@@ -18,10 +18,10 @@
         };
         search = {
           force = true;
-          default = "Searx";
+          default = "Google";
           order = [
-            "Searx"
             "Google"
+            "Searx"
           ];
           engines = {
             "Nix Packages" = {
