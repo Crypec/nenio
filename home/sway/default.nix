@@ -53,44 +53,6 @@
         # };
       };
 
-      # colors = {
-      #    focused = {
-      #          border = {$config.nixos-colors.background};
-      #          background = config.selected.bgd;
-      #          text = selected.txt;
-      #          indicator = selected.ind;
-      #          childBorder = selected.cbr;
-      #       };
-      #       focusedInactive = {
-      #          background = inactive.bgd;
-      #          border = inactive.bor;
-      #          text = inactive.txt;
-      #          indicator = inactive.ind;
-      #          childBorder = inactive.cbr;
-      #       };
-      #       placeholder = {
-      #          background = placeholder.bgd;
-      #          border = placeholder.bor;
-      #          text = placeholder.txt;
-      #          indicator = placeholder.ind;
-      #          childBorder = placeholder.cbr;
-      #       };
-      #       urgent = {
-      #          background = urgent.bgd;
-      #          border = urgent.bor;
-      #          text = urgent.txt;
-      #          indicator = urgent.ind;
-      #          childBorder = urgent.cbr;
-      #       };
-      #       unfocused = {
-      #          background = unfocused.bgd;
-      #          border = unfocused.bor;
-      #          text = unfocused.txt;
-      #          indicator = unfocused.ind;
-      #          childBorder = unfocused.cbr;
-      #       };
-      #    };
-
       window.border = 5;
       focus.followMouse = true;
       gaps = {
@@ -167,6 +129,7 @@
     tofi
 
     alacritty
+    pavucontrol
     thunderbird
     firefox
     chromium

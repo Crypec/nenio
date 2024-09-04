@@ -27,11 +27,17 @@
     "gccarch-znver3"
   ];
 
-  nixpkgs.hostPlatform = {
-    gcc.arch = "znver3";
-    gcc.tune = "znver3";
-    system = "x86_64-linux";
-  };
+  # nixpkgs = {
+  #   localSystem = {
+  #     system = "x86_64-linux";
+  #     config = "znver3";
+  #   };
+  #   hostPlatform = {
+  #     gcc.arch = "znver3";
+  #     gcc.tune = "znver3";
+  #     system = "x86_64-linux";
+  #   };
+  # };
 
   # Use the systemd-boot EFI boot loader.
   boot = {

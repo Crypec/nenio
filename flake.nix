@@ -2,7 +2,7 @@
   description = "nenio: ctx's NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/master";
+    nixpkgs.url = "nixpkgs/nixos-unstable-small";
 
     # home-manager.url = "github:nix-community/home-manager";
     # home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -44,13 +44,13 @@
           system = "x86_64-linux";
           modules = [
             ./hosts/date
-            ./modules/gui.nix
+            ./modules/gui
             ./modules/stylix
 
             agenix.nixosModules.default
             nixos-hardware.nixosModules.msi-b550-a-pro
             home-manager.nixosModules.home-manager
-            stylix.nixosModules.stylix
+            stylix.homeManagerModules.stylix
             {
 
             programs.dconf.enable = true;
