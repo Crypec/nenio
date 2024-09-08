@@ -2,7 +2,7 @@
   description = "nenio: ctx's NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
 
     # home-manager.url = "github:nix-community/home-manager";
     # home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -50,10 +50,9 @@
             agenix.nixosModules.default
             nixos-hardware.nixosModules.msi-b550-a-pro
             home-manager.nixosModules.home-manager
-            stylix.homeManagerModules.stylix
+            stylix.nixosModules.stylix
             {
 
-            programs.dconf.enable = true;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 
@@ -69,7 +68,6 @@
           modules = [
             ./hosts/date
             home-manager.nixosModules.home-manager
-            stylix.nixosModules.stylix
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;

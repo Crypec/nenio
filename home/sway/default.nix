@@ -135,7 +135,7 @@
     chromium
     wl-clipboard
     wdisplays
-    strawberry
+    strawberry-qt6
     signal-desktop-beta
     # gurk-rs
 

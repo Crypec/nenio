@@ -9,7 +9,7 @@
       hide-cursor = true;
       text-cursor = true;
       history = true;
-      fuzzy-match = true;
+      fuzzy-match = false;
       require-match = true;
       auto-accept-single = true;
       hide-input = false;

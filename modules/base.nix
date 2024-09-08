@@ -34,7 +34,7 @@ in
       neomutt
       firefox
       chromium
-      strawberry
+      strawberry-qt6
       signal-desktop-beta
     ];
   };
