@@ -8,7 +8,9 @@
   stylix = {
     enable = true;
     autoEnable = true;
+
     targets.plymouth.enable = false;
+    targets.console.enable = false;
 
     base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
     image = ../../misc/wallpapers/ringstrasse.jpg;

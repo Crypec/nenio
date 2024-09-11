@@ -165,6 +165,10 @@ in
   # };
   security.polkit.enable = true;
 
+  # environment.systemPackages = with pkgs; [
+  #   gnome.dconf-editor
+  # ];
+
   services = {
     dbus.packages = [ pkgs.gcr ];
 
@@ -178,6 +182,5 @@ in
       jack.enable = false;
     };
 
-    # udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   };
 }
