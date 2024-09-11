@@ -58,7 +58,7 @@
       gaps = {
         outer = 3;
         inner = 5;
-        smartBorders = "on";
+        smartBorders = "off";
         smartGaps = false;
       };
 
