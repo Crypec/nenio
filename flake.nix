@@ -45,6 +45,7 @@
           modules = [
             ./hosts/date
             ./modules/gui
+            ./modules/virtualisation
             ./modules/stylix
 
             agenix.nixosModules.default
@@ -74,7 +75,6 @@
 
               home-manager.extraSpecialArgs = inputs;
               home-manager.users.simon = import ./home;
-
             }
           ];
         };
@@ -82,6 +82,7 @@
           system = "x86_64-linux";
           modules = [
             ./hosts/dune
+            ./modules/virtualisation
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
