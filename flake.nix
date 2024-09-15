@@ -43,17 +43,17 @@
         date = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            ./hosts/date
-            ./modules/gui
-            ./modules/virtualisation
-            ./modules/stylix
-
             agenix.nixosModules.default
             nixos-hardware.nixosModules.msi-b550-a-pro
             home-manager.nixosModules.home-manager
             stylix.nixosModules.stylix
-            {
 
+            ./hosts/date
+            ./modules/gui
+            ./modules/virtualisation
+            ./modules/stylix
+            {
+              environment.systemPackages = [ agenix.packages.${system}.default ];
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 
