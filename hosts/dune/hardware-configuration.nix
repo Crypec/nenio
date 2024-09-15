@@ -39,7 +39,8 @@
     fsType = "ext4";
   };
 
-  boot.initrd.luks.devices."nixos".device = "/dev/disk/by-uuid/a5d2ad09-d2e1-4ffc-a890-cc4ba37a6a35";
+  # boot.initrd.luks.devices."nixos".device = "/dev/disk/by-uuid/a5d2ad09-d2e1-4ffc-a890-cc4ba37a6a35";
+  boot.initrd.luks.devices."nixos".device = "/dev/md0";
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/5DA5-D18A";

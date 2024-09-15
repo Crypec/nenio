@@ -137,7 +137,8 @@
     wdisplays
     strawberry-qt6
     signal-desktop-beta
-    # gurk-rs
+    gurk-rs
+    tor-browser
 
     # waypipe # forward application over ssh
     # wdisplays # graphical output manager
