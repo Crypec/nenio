@@ -139,6 +139,7 @@
     signal-desktop-beta
     gurk-rs
     tor-browser
+    virt-manager
 
     # waypipe # forward application over ssh
     # wdisplays # graphical output manager

@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, inputs, ... }:
 let
   username = "simon";
 in
@@ -156,6 +156,7 @@ in
 
     tree
     lm_sensors
+    inputs.agenix.packages.${system}.agenix
   ];
 
   # Enable sound with pipewire.

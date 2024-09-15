@@ -83,6 +83,8 @@
           modules = [
             ./hosts/dune
             ./modules/virtualisation
+
+            agenix.nixosModules.default
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;

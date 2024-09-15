@@ -23,12 +23,13 @@
   systemd.network.enable = true;
 
   networking = {
-    hostName = "date";
+    hostName = "dune";
+    domain = "ctx.dev";
+
     useNetworkd = true;
+    useDHCP = false;
     wireless.enable = false;
   };
-
-  
 
   # nixpkgs = {
   #   localSystem = {
@@ -68,78 +69,11 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  services.resolved.enable = true;
+
   services.fstrim.enable = true;
 
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  # Environment variables 
-
-  # Force wayland when possible 
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    WLR_NO_HARDWARE_CURSORS = "1";
-    WLR_RENDERER = "vulkan";
-  };
-
-  # Fix disappearing cursor on Hyprland 
-
-  hardware = {
-    enableRedistributableFirmware = true;
-
-    graphics = {
-
-      # driSupport = true; 
-      # driSupport32Bit = true; 
-
-      enable = true;
-      extraPackages = with pkgs; [
-        # trying to fix `WLR_RENDERER=vulkan` in sway
-        vulkan-validation-layers
-      ];
-    };
-    nvidia = {
-      package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-          version = "560.35.03";
-          sha256_64bit = "sha256-8pMskvrdQ8WyNBvkU/xPc/CtcYXCa7ekP73oGuKfH+M=";
-          sha256_aarch64 = "sha256-s8ZAVKvRNXpjxRYqM3E5oss5FdqW+tv1qQC2pDjfG+s=";
-          openSha256 = "sha256-/32Zf0dKrofTmPZ3Ratw4vDM7B+OgpC4p7s+RHUjCrg=";
-          settingsSha256 = "sha256-kQsvDgnxis9ANFmwIwB7HX5MkIAcpEEAHc8IBOLdXvk=";
-          persistencedSha256 = "sha256-E2J2wYYyRu7Kc3MMZz/8ZIemcZg68rkzvqEwFAL3fFs=";
-      };
-      modesetting.enable = true;
-      powerManagement.enable = false;
-      powerManagement.finegrained = false;
-      open = true;
-      # package = config.boot.kernelPackages.nvidiaPackages.beta;
-    };
-  };
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  #console = {
-  #  font = "Lat2-Terminus16";
-  #  keyMap = "us";
-  #  useXkbConfig = true; # use xkb.options in tty.
-  #};
-
-  # Enable the X11 windowing system.
-  #services.xserver.enable = true;
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -150,7 +84,7 @@
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
+  system.copySystemConfiguration = true;
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
