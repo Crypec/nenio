@@ -18,6 +18,8 @@
           $env.config = {
             show_banner: false,
           }
+          $env.EDITOR = 'hx'
+          $env.GIT_EDITOR = 'hx'
         '';
       };
 

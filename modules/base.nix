@@ -1,8 +1,9 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 let
   username = "simon";
 in
 {
+
   # ============================= User related =============================
 
   # use the much newer nftables instead of the old iptables
@@ -156,6 +157,7 @@ in
 
     tree
     lm_sensors
+    inputs.agenix.packages."${system}".default
   ];
 
   # Enable sound with pipewire.

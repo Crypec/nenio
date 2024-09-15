@@ -4,9 +4,6 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
-    # home-manager.url = "github:nix-community/home-manager";
-    # home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,11 +23,10 @@
       # optionally choose not to download darwin deps (saves some resources on Linux)
       inputs.darwin.follows = "";
     };
-
   };
 
-  outputs =
-    inputs@{
+  outputs = inputs@{
+      self,
       nixpkgs,
       nixos-hardware,
       home-manager,
@@ -42,6 +38,7 @@
       nixosConfigurations = {
         date = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
           modules = [
             agenix.nixosModules.default
             nixos-hardware.nixosModules.msi-b550-a-pro
@@ -53,11 +50,9 @@
             ./modules/virtualisation
             ./modules/stylix
             {
-              environment.systemPackages = [ agenix.packages.${system}.default ];
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 
-              home-manager.extraSpecialArgs = inputs;
               home-manager.users.simon = import ./home;
 
               home-manager.backupFileExtension = "hm.bk";
@@ -73,7 +68,6 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 
-              home-manager.extraSpecialArgs = inputs;
               home-manager.users.simon = import ./home;
             }
           ];
@@ -90,7 +84,6 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 
-              home-manager.extraSpecialArgs = inputs;
               home-manager.users.simon = import ./home;
             }
           ];
