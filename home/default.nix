@@ -5,6 +5,7 @@
     ./alacritty
     ./helix
     ./shell
+    ./git
 
     ./sway
     ./firefox
