@@ -26,6 +26,7 @@ in
       "networkmanager"
       "wheel"
       "libvirtd"
+      "audio"
     ];
 
     packages = with pkgs; [
@@ -34,7 +35,6 @@ in
 
       thunderbird
       neomutt
-      firefox
       chromium
       strawberry-qt6
       signal-desktop-beta

@@ -2,6 +2,10 @@
 
 {
 
+  environment.systemPackages = with pkgs; [
+    wooting-udev-rules
+  ];
+
   services.greetd = {
     enable = true;
     settings = rec {

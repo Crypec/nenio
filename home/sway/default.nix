@@ -131,7 +131,7 @@
     alacritty
     pavucontrol
     thunderbird
-    firefox
+    # firefox
     chromium
     wl-clipboard
     wdisplays

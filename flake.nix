@@ -23,6 +23,7 @@
       # optionally choose not to download darwin deps (saves some resources on Linux)
       inputs.darwin.follows = "";
     };
+    musnix  = { url = "github:musnix/musnix"; };
   };
 
   outputs = inputs@{
@@ -44,11 +45,13 @@
             nixos-hardware.nixosModules.msi-b550-a-pro
             home-manager.nixosModules.home-manager
             stylix.nixosModules.stylix
+            inputs.musnix.nixosModules.musnix
 
             ./hosts/date
             ./modules/gui
             ./modules/virtualisation
             ./modules/stylix
+            ./modules/musnix
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;

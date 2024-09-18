@@ -21,6 +21,10 @@
     };
   };
 
+  systemd.tmpfiles.rules = [
+    "d /data 0750 root root" 
+  ];
+
   nix.settings.system-features = [
     "benchmark"
     "big-parallel"
@@ -58,6 +62,39 @@
       };
     };
   };
+
+  # age.secrets.disk-data.file = ../../../secrets/disk-data.age;
+  # systemd.services.bcachefs-unlock-and-mount-data = {
+  #   enable = true;
+  #   description = "Unlock and mount /data partition";   
+
+  #   wantedBy = [ "multi-user.target" ];
+  #   after = [ "local-fs.target" ];
+  #   wants = [ "local-fs.target" ];
+
+  #   serviceConfig = {
+  #     Type = "oneshot";
+  #     RemainAfterExit = true;
+  #     ExecStart = pkgs.writeShellScript "bcachefs-unlock-mount" ''
+  #       DEV_IDENT="/dev/disks/by-uuid/293ff970-3751-426f-be12-453929466b83"
+  #       MOUNT_POINT="/data"
+
+  #       if ${pkgs.bcachefs-tools}/bin/bcachefs unlock --key-file="${config.age.secrets.disk-data.path}" "$DEV_IDENT"; then
+  #         echo "Successfully unlocked bcachefs partition"
+  #         if ${pkgs.util-linux}/bin/mount -t bcachefs "/dev/disk/by-label/$DEVICE_LABEL" "$MOUNT_POINT"; then
+  #           echo "Successfully mounted bcachefs partition to $MOUNT_POINT"
+  #         else
+  #           echo "Failed to mount bcachefs partition"
+  #           exit 1
+  #         fi
+  #       else
+  #         echo "Failed to unlock bcachefs partition"
+  #         exit 1
+  #       fi
+  #     '';
+  #     ExecStop = "${pkgs.util-linux}/bin/umount /data";
+  #   };      
+  # };
 
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

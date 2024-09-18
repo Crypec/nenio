@@ -4,34 +4,36 @@
 {
   config,
   lib,
-  modulesPath,
   ...
 }:
 
 {
-  # imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  # "usb_storage"
-  boot.initrd.availableKernelModules = [
-    "nvme"
-    "xhci_pci"
-    "ahci"
-    "usbhid"
-    "sd_mod"
-  ];
+  boot = {
+    extraModulePackages = [ ];
+    kernelModules = [ "kvm-amd" ];
+    initrd = {
+      kernelModules = [];
+      availableKernelModules = [
+          "nvme"
+          "xhci_pci"
+          "ahci"
+          "usbhid"
+          "sd_mod"
+      ];
 
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+      luks.devices."nixos".device = "/dev/disk/by-uuid/a5d2ad09-d2e1-4ffc-a890-cc4ba37a6a35";
+    };
 
-  # Software RAID
-  boot.swraid = {
-    enable = true;
+    supportedFilesystems = [ "bcachefs" ];
+    swraid = {
+      enable = true;
 
-    mdadmConf = ''
-      ARRAY /dev/md0 level=raid1 num-devices=2 metadata=1.2 name=nixos:0 UUID=363d2583:3d7916b0:9994ddf9:e8ad978d devices=/dev/nvme0n1p2,/dev/nvme1n1p2
-      MAILADDR mdadm@ctx.dev
-    '';
+      mdadmConf = ''
+        ARRAY /dev/md0 level=raid1 num-devices=2 metadata=1.2 name=nixos:0 UUID=363d2583:3d7916b0:9994ddf9:e8ad978d devices=/dev/nvme0n1p2,/dev/nvme1n1p2
+        MAILADDR mdadm@ctx.dev
+      '';
+    };
   };
 
   fileSystems."/" = {
@@ -39,7 +41,6 @@
     fsType = "ext4";
   };
 
-  boot.initrd.luks.devices."nixos".device = "/dev/disk/by-uuid/a5d2ad09-d2e1-4ffc-a890-cc4ba37a6a35";
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/5DA5-D18A";
@@ -50,7 +51,10 @@
     ];
   };
 
-  swapDevices = [ ];
+  swapDevices = [{
+    device = "/swapfile";
+    size = 64 * 1024; # 64GB
+  }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
