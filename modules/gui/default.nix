@@ -6,6 +6,8 @@
     wooting-udev-rules
   ];
 
+  hardware.wooting.enable = true;
+
   services.greetd = {
     enable = true;
     settings = rec {

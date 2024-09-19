@@ -27,6 +27,7 @@ in
       "wheel"
       "libvirtd"
       "audio"
+      "input"
     ];
 
     packages = with pkgs; [

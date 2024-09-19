@@ -123,10 +123,6 @@
     enableRedistributableFirmware = true;
 
     graphics = {
-
-      # driSupport = true; 
-      # driSupport32Bit = true; 
-
       enable = true;
       extraPackages = with pkgs; [
         # trying to fix `WLR_RENDERER=vulkan` in sway
