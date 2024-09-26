@@ -140,6 +140,7 @@
     gurk-rs
     tor-browser
     virt-manager
+    jellyfin-media-player
 
     # waypipe # forward application over ssh
     # wdisplays # graphical output manager

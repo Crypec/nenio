@@ -52,6 +52,7 @@
             ./modules/virtualisation
             ./modules/stylix
             ./modules/musnix
+            ./modules/yubikey
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
