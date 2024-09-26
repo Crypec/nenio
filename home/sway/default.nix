@@ -110,8 +110,8 @@
       # Use kitty as default terminal
       terminal = "alacritty";
       startup = [
-        # Launch Firefox on start
         { command = "swaybg -m fill -i ${../../misc/wallpapers/ringstrasse.jpg}"; }
+        { command = "lxqt-policykit-agent"; }
       ];
 
     };
@@ -142,6 +142,8 @@
     virt-manager
     jellyfin-media-player
 
+
+    lxqt.lxqt-policykit
     # waypipe # forward application over ssh
     # wdisplays # graphical output manager
     # wev # wayland event monitor

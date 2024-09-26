@@ -53,6 +53,7 @@
             ./modules/stylix
             ./modules/musnix
             ./modules/yubikey
+            ./modules/polkit
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
