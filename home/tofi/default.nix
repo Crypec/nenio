@@ -8,21 +8,24 @@
     settings = {
       hide-cursor = true;
       text-cursor = true;
+
       history = true;
       fuzzy-match = false;
+      matching-algorithm = "prefix";
       require-match = true;
       auto-accept-single = true;
       hide-input = false;
       hidden-character = "*";
-      drun-launch = false;
+      drun-launch = true;
       terminal = "alacritty";
       late-keyboard-init = false;
       multi-instance = false;
-      ascii-input = true;
-      # ;
+      ascii-input = false;
+
       # STYLE OPTIONS;
       font-features = "";
       font-variations = "";
+
       # background-color = #000;
       outline-width = 0;
       # outline-color = #080800;
@@ -53,11 +56,8 @@
       # default-result-background = #00000000;
       default-result-background-padding = 0;
       default-result-background-corner-radius = 0;
-      # ; alternate-result-color =;
-      # ; alternate-result-background = ;
-      # ; alternate-result-background-padding =;
-      # ; alternate-result-background-corner-radius = ;
-      num-results = 7;
+
+      num-results = 10;
       selection-padding = 0;
       selection-background-padding = 0;
       selection-background-corner-radius = 0;
