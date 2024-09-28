@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   imports = [
     ./alacritty
     ./helix
@@ -30,7 +28,7 @@
       GIT_EDITOR = EDITOR;
     };
 
-    packages = with pkgs; [ ];
+    packages = with pkgs; [];
   };
 
   # This value determines the Home Manager release that your

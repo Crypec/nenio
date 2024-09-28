@@ -1,8 +1,5 @@
-{ pkgs, ... }:
-
-{
-
-  imports = [ ];
+{pkgs, ...}: {
+  imports = [];
 
   programs.firefox = {
     enable = true;
@@ -41,19 +38,19 @@
                 }
               ];
               icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = [ "@np" ];
+              definedAliases = ["@np"];
             };
             "NixOS Wiki" = {
-              urls = [ { template = "https://nixos.wiki/index.php?search={searchTerms}"; } ];
+              urls = [{template = "https://nixos.wiki/index.php?search={searchTerms}";}];
               iconUpdateURL = "https://nixos.wiki/favicon.png";
               updateInterval = 24 * 60 * 60 * 1000; # every day
-              definedAliases = [ "@nw" ];
+              definedAliases = ["@nw"];
             };
             "Searx" = {
-              urls = [ { template = "https://searx.ctx.dev/?q={searchTerms}"; } ];
+              urls = [{template = "https://searx.ctx.dev/?q={searchTerms}";}];
               iconUpdateURL = "https://nixos.wiki/favicon.png";
               updateInterval = 24 * 60 * 60 * 1000; # every day
-              definedAliases = [ "@searx" ];
+              definedAliases = ["@searx"];
             };
             "Bing".metaData.hidden = true;
             "Google".metaData.alias = "@g"; # builtin engines only support specifying one additional alias

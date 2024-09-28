@@ -23,76 +23,84 @@
       # optionally choose not to download darwin deps (saves some resources on Linux)
       inputs.darwin.follows = "";
     };
-    musnix  = { url = "github:musnix/musnix"; };
+
+    alejandra = {
+      url = "github:kamadorueda/alejandra/3.0.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    musnix = {url = "github:musnix/musnix";};
   };
 
-  outputs = inputs@{
-      self,
-      nixpkgs,
-      nixos-hardware,
-      home-manager,
-      agenix,
-      stylix,
-      ...
-    }:
-    {
-      nixosConfigurations = {
-        date = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [
-            agenix.nixosModules.default
-            nixos-hardware.nixosModules.msi-b550-a-pro
-            home-manager.nixosModules.home-manager
-            stylix.nixosModules.stylix
-            inputs.musnix.nixosModules.musnix
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    nixos-hardware,
+    home-manager,
+    agenix,
+    stylix,
+    alejandra,
+    ...
+  }: {
+    nixosConfigurations = {
+      date = nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+        specialArgs = {inherit inputs;};
+        modules = [
+          agenix.nixosModules.default
+          nixos-hardware.nixosModules.msi-b550-a-pro
+          home-manager.nixosModules.home-manager
+          stylix.nixosModules.stylix
+          inputs.musnix.nixosModules.musnix
 
-            ./hosts/date
-            ./modules/gui
-            ./modules/virtualisation
-            ./modules/stylix
-            ./modules/musnix
-            ./modules/yubikey
-            ./modules/polkit
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
+          ./hosts/date
+          ./modules/gui
+          ./modules/virtualisation
+          ./modules/stylix
+          ./modules/musnix
+          ./modules/yubikey
+          ./modules/polkit
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
 
-              home-manager.users.simon = import ./home;
+              users.simon = import ./home;
 
-              home-manager.backupFileExtension = "hm.bk";
-            }
-          ];
-        };
-        late = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./hosts/date
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
+              backupFileExtension = "hm.bk";
+            };
+          }
+        ];
+      };
+      late = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/date
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
 
-              home-manager.users.simon = import ./home;
-            }
-          ];
-        };
-        dune = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./hosts/dune
-            ./modules/virtualisation
+            home-manager.users.simon = import ./home;
+          }
+        ];
+      };
+      dune = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/dune
+          ./modules/virtualisation
 
-            agenix.nixosModules.default
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
+          agenix.nixosModules.default
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
 
-              home-manager.users.simon = import ./home;
-            }
-          ];
-        };
+            home-manager.users.simon = import ./home;
+          }
+        ];
       };
     };
+  };
 }

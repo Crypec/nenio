@@ -1,9 +1,13 @@
-{ config, pkgs, lib, inputs, ... }:
-let
-  username = "simon";
-in
 {
-
+  config,
+  pkgs,
+  lib,
+  inputs,
+  alejandra,
+  ...
+}: let
+  username = "simon";
+in {
   # ============================= User related =============================
 
   # use the much newer nftables instead of the old iptables
@@ -45,7 +49,7 @@ in
   # given the users in this list the right to specify additional substituters via:
   #    1. `nixConfig.substituers` in `flake.nix`
   #    2. command line args `--options substituers http://xxx`
-  nix.settings.trusted-users = [ username ];
+  nix.settings.trusted-users = [username];
 
   # customise /etc/nix/nix.conf declaratively via `nix.settings`
   nix.settings = {
@@ -55,9 +59,9 @@ in
       "flakes"
     ];
 
-    substituters = [ ];
+    substituters = [];
 
-    trusted-public-keys = [ ];
+    trusted-public-keys = [];
     builders-use-substitutes = true;
   };
 
@@ -127,7 +131,7 @@ in
         "JetBrainsMono Nerd Font"
         "Noto Color Emoji"
       ];
-      emoji = [ "Noto Color Emoji" ];
+      emoji = ["Noto Color Emoji"];
     };
   };
 
@@ -156,13 +160,16 @@ in
     jujutsu
     git
 
+    btop # better htop alternative
+    tokei # count lines of code
+
     tree
     lm_sensors
     inputs.agenix.packages."${system}".default
+    inputs.alejandra.defaultPackage.${system}
   ];
 
   # environment.systemPackages = with pkgs; [
   #   gnome.dconf-editor
   # ];
-
 }

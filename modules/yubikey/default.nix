@@ -1,11 +1,13 @@
-{config, pkgs, ...}:
 {
+  config,
+  pkgs,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
-    yubikey-manager     
-  ]; 
+    yubikey-manager
+  ];
 
-  services.pcscd.enable = true;  
+  services.pcscd.enable = true;
 
   hardware.gpgSmartcards.enable = true; # for yubikey
-  
 }

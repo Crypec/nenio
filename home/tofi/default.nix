@@ -1,8 +1,9 @@
-{ config, lib, ... }:
-
 {
-
-  imports = [ ];
+  config,
+  lib,
+  ...
+}: {
+  imports = [];
   programs.tofi = {
     enable = true;
     settings = {
@@ -89,7 +90,7 @@
   # https://github.com/philj56/tofi/issues/115#issuecomment-1701748297
   # rebuild tofi cache after every home-manager reload, such that it can find all applications
   home.activation = {
-    regenerateTofiCache = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    regenerateTofiCache = lib.hm.dag.entryAfter ["writeBoundary"] ''
       tofi_cache=${config.xdg.cacheHome}/tofi-drun
       [[ -f "$tofi_cache" ]] && rm "$tofi_cache"
     '';

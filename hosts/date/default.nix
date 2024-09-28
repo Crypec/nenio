@@ -1,15 +1,86 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
     ../../modules/base.nix
   ];
+
+  boot = {
+    kernelPackages = pkgs.linuxPackages_zen;
+
+    extraModulePackages = [];
+    kernelModules = ["kvm-amd"];
+
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+
+    initrd = {
+      enable = true;
+
+      systemd = {
+        enable = true;
+        emergencyAccess = true;
+      };
+
+      kernelModules = [];
+      availableKernelModules = [
+        "nvme"
+        "xhci_pci"
+        "ahci"
+        "usbhid"
+        "sd_mod"
+      ];
+
+      luks.devices."nixos".device = "/dev/disk/by-uuid/a5d2ad09-d2e1-4ffc-a890-cc4ba37a6a35";
+    };
+
+    swraid = {
+      enable = true;
+
+      mdadmConf = ''
+        ARRAY /dev/md0 level=raid1 num-devices=2 metadata=1.2 name=nixos:0 UUID=363d2583:3d7916b0:9994ddf9:e8ad978d devices=/dev/nvme0n1p2,/dev/nvme1n1p2
+        MAILADDR mdadm@ctx.dev
+      '';
+    };
+  };
+
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/ed6881af-f2fb-48ee-849b-ffd9e35d2935";
+    fsType = "ext4";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/5DA5-D18A";
+    fsType = "vfat";
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+    ];
+  };
+
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 64 * 1024; # 64GB
+    }
+  ];
+
+  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+  # (the default) this is the recommended approach. When using systemd-networkd it's
+  # still possible to use this option, but it's recommended to use it in conjunction
+  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+  networking.useDHCP = lib.mkForce true;
+
+  # nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.amd.updateMicrocode = true;
 
   networking = {
     hostName = "date";
@@ -17,12 +88,12 @@
 
     networkmanager = {
       enable = true;
-      wifi.backend = "wpa_supplicant";
+      wifi.backend = "iwd";
     };
   };
 
   systemd.tmpfiles.rules = [
-    "d /data 0750 root root" 
+    "d /data 0750 root root"
   ];
 
   nix.settings.system-features = [
@@ -46,27 +117,11 @@
   # };
 
   # Use the systemd-boot EFI boot loader.
-  boot = {
-    kernelPackages = pkgs.linuxPackages_zen;
-    loader = {
-      systemd-boot = {
-        enable = true;
-      };
-      efi.canTouchEfiVariables = true;
-    };
-    initrd = {
-      enable = true;
-      systemd = {
-        enable = true;
-        emergencyAccess = true;
-      };
-    };
-  };
 
   # age.secrets.disk-data.file = ../../../secrets/disk-data.age;
   # systemd.services.bcachefs-unlock-and-mount-data = {
   #   enable = true;
-  #   description = "Unlock and mount /data partition";   
+  #   description = "Unlock and mount /data partition";
 
   #   wantedBy = [ "multi-user.target" ];
   #   after = [ "local-fs.target" ];
@@ -93,7 +148,7 @@
   #       fi
   #     '';
   #     ExecStop = "${pkgs.util-linux}/bin/umount /data";
-  #   };      
+  #   };
   # };
 
   # Pick only one of the below networking options.
@@ -106,18 +161,17 @@
 
   services.fstrim.enable = true;
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
 
-  # Environment variables 
+  # Environment variables
 
-  # Force wayland when possible 
+  # Force wayland when possible
+  # Fix disappearing cursor on Hyprland
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     WLR_NO_HARDWARE_CURSORS = "1";
     WLR_RENDERER = "vulkan";
   };
-
-  # Fix disappearing cursor on Hyprland 
 
   hardware = {
     enableRedistributableFirmware = true;
@@ -131,18 +185,17 @@
     };
     nvidia = {
       package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-          version = "560.35.03";
-          sha256_64bit = "sha256-8pMskvrdQ8WyNBvkU/xPc/CtcYXCa7ekP73oGuKfH+M=";
-          sha256_aarch64 = "sha256-s8ZAVKvRNXpjxRYqM3E5oss5FdqW+tv1qQC2pDjfG+s=";
-          openSha256 = "sha256-/32Zf0dKrofTmPZ3Ratw4vDM7B+OgpC4p7s+RHUjCrg=";
-          settingsSha256 = "sha256-kQsvDgnxis9ANFmwIwB7HX5MkIAcpEEAHc8IBOLdXvk=";
-          persistencedSha256 = "sha256-E2J2wYYyRu7Kc3MMZz/8ZIemcZg68rkzvqEwFAL3fFs=";
+        version = "560.35.03";
+        sha256_64bit = "sha256-8pMskvrdQ8WyNBvkU/xPc/CtcYXCa7ekP73oGuKfH+M=";
+        sha256_aarch64 = "sha256-s8ZAVKvRNXpjxRYqM3E5oss5FdqW+tv1qQC2pDjfG+s=";
+        openSha256 = "sha256-/32Zf0dKrofTmPZ3Ratw4vDM7B+OgpC4p7s+RHUjCrg=";
+        settingsSha256 = "sha256-kQsvDgnxis9ANFmwIwB7HX5MkIAcpEEAHc8IBOLdXvk=";
+        persistencedSha256 = "sha256-E2J2wYYyRu7Kc3MMZz/8ZIemcZg68rkzvqEwFAL3fFs=";
       };
       modesetting.enable = true;
       powerManagement.enable = false;
       powerManagement.finegrained = false;
       open = true;
-      # package = config.boot.kernelPackages.nvidiaPackages.beta;
     };
   };
 

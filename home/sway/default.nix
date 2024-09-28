@@ -3,10 +3,8 @@
   config,
   lib,
   ...
-}:
-
-{
-  imports = [ ../tofi ];
+}: {
+  imports = [../tofi];
 
   wayland.windowManager.sway = {
     enable = true;
@@ -23,10 +21,9 @@
       left = "h";
       right = "l";
 
-      keybindings =
-        let
-          mod = config.wayland.windowManager.sway.config.modifier;
-        in
+      keybindings = let
+        mod = config.wayland.windowManager.sway.config.modifier;
+      in
         lib.mkOptionDefault {
           "${mod}+Shift+e" = "exit";
           "${mod}+Shift+w" = "kill";
@@ -94,7 +91,7 @@
 
       # defaultWorkspace = "2";
 
-      # workspaceOutputAssign = { 
+      # workspaceOutputAssign = {
       # };
 
       # # Set variables
@@ -110,10 +107,9 @@
       # Use kitty as default terminal
       terminal = "alacritty";
       startup = [
-        { command = "swaybg -m fill -i ${../../misc/wallpapers/ringstrasse.jpg}"; }
-        { command = "lxqt-policykit-agent"; }
+        {command = "swaybg -m fill -i ${../../misc/wallpapers/ringstrasse.jpg}";}
+        {command = "lxqt-policykit-agent";}
       ];
-
     };
     extraConfig = "
       default_border pixel 2
@@ -141,7 +137,6 @@
     tor-browser
     virt-manager
     jellyfin-media-player
-
 
     lxqt.lxqt-policykit
     # waypipe # forward application over ssh

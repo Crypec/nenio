@@ -1,4 +1,7 @@
-{config, pkgs, ...}:
 {
-  security.polkit.enable = true; 
+  config,
+  pkgs,
+  ...
+}: {
+  security.polkit.enable = true;
 }

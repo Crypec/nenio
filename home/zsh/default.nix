@@ -1,9 +1,11 @@
-{ config, pkgs, ... }:
-
 {
-  imports = [ ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [];
 
-  environment.shells = with pkgs; [ zsh ];
+  environment.shells = with pkgs; [zsh];
   users.defaultUserShell = pkgs.zsh;
 
   programs.zsh = {
@@ -21,5 +23,4 @@
       path = "${config.xdg.dataHome}/zsh/history";
     };
   };
-
 }
