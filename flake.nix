@@ -60,6 +60,7 @@
           ./modules/musnix
           ./modules/yubikey
           ./modules/polkit
+          ./modules/udev
           {
             home-manager = {
               useGlobalPkgs = true;
