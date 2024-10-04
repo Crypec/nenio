@@ -156,7 +156,8 @@
     virt-manager
     jellyfin-media-player
 
-    lxqt.lxqt-policykit
+    lxqt.lxqt-policykit 
+
     # waypipe # forward application over ssh
     # wdisplays # graphical output manager
     # wev # wayland event monitor

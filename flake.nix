@@ -30,6 +30,11 @@
     };
 
     musnix = {url = "github:musnix/musnix";};
+
+    nix-mineral = {
+      url = "github:cynicsketch/nix-mineral"; # Refers to the main branch and is updated to the latest commit when you use "nix flake update" 
+      flake = false;
+    };
   };
 
   outputs = inputs @ {
@@ -52,6 +57,7 @@
           home-manager.nixosModules.home-manager
           stylix.nixosModules.stylix
           inputs.musnix.nixosModules.musnix
+          "${inputs.nix-mineral}/nix-mineral.nix"
 
           ./hosts/date
           ./modules/gui
