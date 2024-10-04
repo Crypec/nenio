@@ -4,10 +4,19 @@
   lib,
   ...
 }: {
-  imports = [../tofi];
+  imports = [
+    ../tofi
+    ../waybar
+  ];
 
   wayland.windowManager.sway = {
     enable = true;
+    package = pkgs.swayfx;
+
+    # FIXME(Simon): enable this again. This is just a dirty workaround to fix my nixos config
+    # FIXME(Simon): from not compiling with the `package = pkgs.swayfx` option set.
+    checkConfig = false;
+
     wrapperFeatures.gtk = true;
     systemd.enable = true;
 
@@ -15,6 +24,7 @@
       modifier = "Mod4";
 
       menu = "tofi-drun --drun-launch=true";
+      # bars = [{command = "${pkgs.waybar}/bin/waybar";}];
 
       down = "j";
       up = "k";
@@ -118,6 +128,14 @@
       for_window [app_id='.*'] split toggle
       # default_orientation vertical
     ";
+  };
+
+  programs.swaylock = {
+    enable = true;
+    package = pkgs.swaylock-effects;
+    settings = {
+      show-failed-attempts = true;
+    };
   };
 
   home.packages = with pkgs; [

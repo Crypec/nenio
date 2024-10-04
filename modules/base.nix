@@ -13,6 +13,17 @@ in {
   # use the much newer nftables instead of the old iptables
   networking.nftables.enable = true;
 
+  services.xserver = {
+    xkb = {
+      layout = "us";
+      variant = "altgr-intl";
+      options = "grp:alt_shift_toggle";
+      model = "pc105";
+    };
+  };
+
+  console.keyMap = "us";
+
   # use a new reworked configuration switcher
   system.switch = {
     enable = false;
@@ -150,6 +161,8 @@ in {
     };
     openFirewall = false;
   };
+
+  services.fwupd.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

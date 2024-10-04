@@ -204,14 +204,11 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
-  #console = {
-  #  font = "Lat2-Terminus16";
-  #  keyMap = "us";
-  #  useXkbConfig = true; # use xkb.options in tty.
-  #};
-
-  # Enable the X11 windowing system.
-  #services.xserver.enable = true;
+  # console = {
+  #   # font = "Lat2-Terminus16";
+  #   keyMap = "us";
+  #   useXkbConfig = true; # use xkb.options in tty.
+  # };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

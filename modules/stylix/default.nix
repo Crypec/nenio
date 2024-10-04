@@ -11,8 +11,14 @@
     targets.plymouth.enable = false;
     targets.console.enable = false;
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/brewer.yaml";
     image = ../../misc/wallpapers/ringstrasse.jpg;
+
+    cursor = {
+      name = "Bibata-Modern-Classic";
+      package = pkgs.bibata-cursors;
+      size = 20;
+    };
 
     fonts = {
       monospace = {
