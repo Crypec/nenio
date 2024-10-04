@@ -166,6 +166,11 @@ in {
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+
+  environment.defaultPackages = with pkgs; lib.mkForce [
+    strace
+  ]; # remove default nixos packages
+
   environment.systemPackages = with pkgs; [
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     helix
@@ -176,13 +181,14 @@ in {
     btop # better htop alternative
     tokei # count lines of code
 
-    tree
+    rsync
+
+    
+
     lm_sensors
+
     inputs.agenix.packages."${system}".default
+
     inputs.alejandra.defaultPackage.${system}
   ];
-
-  # environment.systemPackages = with pkgs; [
-  #   gnome.dconf-editor
-  # ];
 }
