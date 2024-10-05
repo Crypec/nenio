@@ -17,20 +17,6 @@
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
 
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
-  home = {
-    username = "simon";
-    homeDirectory = "/home/simon";
-
-    sessionVariables = rec {
-      EDITOR = "hx";
-      GIT_EDITOR = EDITOR;
-    };
-
-    packages = with pkgs; [];
-  };
-
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards

@@ -32,7 +32,7 @@
     musnix = {url = "github:musnix/musnix";};
 
     nix-mineral = {
-      url = "github:crypec/nix-mineral"; # Refers to the main branch and is updated to the latest commit when you use "nix flake update" 
+      url = "github:crypec/nix-mineral"; # Refers to the main branch and is updated to the latest commit when you use "nix flake update"
       flake = false;
     };
   };
@@ -67,12 +67,14 @@
           ./modules/yubikey
           ./modules/polkit
           ./modules/udev
+
+          ./users/simon.nix
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
 
-              users.simon = import ./home;
+              extraSpecialArgs = {inherit inputs;};
 
               backupFileExtension = "hm.bk";
             };

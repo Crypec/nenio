@@ -1,10 +1,14 @@
-{config, pkgs, inputs, ...}:
 {
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     "${inputs.nix-mineral}/nix-mineral.nix"
   ];
   nix-mineral = {
-    enable = false;    
+    enable = false;
     overrides = {
       compatibility = {
         allow-unsigned-modules = false;

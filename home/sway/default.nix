@@ -24,7 +24,7 @@
       modifier = "Mod4";
 
       menu = "tofi-drun --drun-launch=true";
-      # bars = [{command = "${pkgs.waybar}/bin/waybar";}];
+      bars = [{command = "${pkgs.waybar}/bin/waybar";}];
 
       down = "j";
       up = "k";
@@ -138,6 +138,10 @@
     };
   };
 
+  services.mako = {
+    enable = true;
+  };
+
   home.packages = with pkgs; [
     # swaybg
     tofi
@@ -156,7 +160,7 @@
     virt-manager
     jellyfin-media-player
 
-    lxqt.lxqt-policykit 
+    lxqt.lxqt-policykit
 
     # waypipe # forward application over ssh
     # wdisplays # graphical output manager

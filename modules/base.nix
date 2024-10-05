@@ -5,9 +5,7 @@
   inputs,
   alejandra,
   ...
-}: let
-  username = "simon";
-in {
+}: {
   # ============================= User related =============================
 
   # use the much newer nftables instead of the old iptables
@@ -31,36 +29,36 @@ in {
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.simon = {
-    isNormalUser = true;
-    description = "Simon";
+  # users.users.simon = {
+  #   isNormalUser = true;
+  #   description = "Simon";
 
-    shell = pkgs.nushell;
+  #   shell = pkgs.nushell;
 
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "libvirtd"
-      "audio"
-      "input"
-    ];
+  #   extraGroups = [
+  #     "networkmanager"
+  #     "wheel"
+  #     "libvirtd"
+  #     "audio"
+  #     "input"
+  #   ];
 
-    packages = with pkgs; [
-      alacritty
-      eza
+  #   packages = with pkgs; [
+  #     alacritty
+  #     eza
 
-      thunderbird
-      neomutt
-      chromium
-      strawberry-qt6
-      signal-desktop-beta
-    ];
-  };
+  #     thunderbird
+  #     neomutt
+  #     chromium
+  #     strawberry-qt6
+  #     signal-desktop-beta
+  #   ];
+  # };
 
   # given the users in this list the right to specify additional substituters via:
   #    1. `nixConfig.substituers` in `flake.nix`
   #    2. command line args `--options substituers http://xxx`
-  nix.settings.trusted-users = [username];
+  # nix.settings.trusted-users = [username];
 
   # customise /etc/nix/nix.conf declaratively via `nix.settings`
   nix.settings = {
@@ -167,9 +165,10 @@ in {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
 
-  environment.defaultPackages = with pkgs; lib.mkForce [
-    strace
-  ]; # remove default nixos packages
+  environment.defaultPackages = with pkgs;
+    lib.mkForce [
+      strace
+    ]; # remove default nixos packages
 
   environment.systemPackages = with pkgs; [
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
@@ -182,8 +181,6 @@ in {
     tokei # count lines of code
 
     rsync
-
-    
 
     lm_sensors
 
