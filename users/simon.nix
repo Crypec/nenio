@@ -41,12 +41,20 @@
     imports = [../home];
 
     accounts.email.accounts = {
-      systemli = {
+      systemli = rec {
         address = "simon.kunz@systemli.org";
         realName = "Simon Kunz";
         primary = true;
 
-        userName = "simon.kunz";
+
+        mbsync.enable = true;
+        notmuch.neomutt.enable = true;
+        notmuch.enable = true;
+        neomutt.enable = false;
+
+        userName = "${address}";
+        imap.host = "mail.systemli.org";
+        passwordCommand = "rbw get ${address}";
       };
     };
   };
