@@ -21,14 +21,7 @@
     ];
 
     packages = with pkgs; [
-      alacritty
       eza
-
-      thunderbird
-      neomutt
-      chromium
-      strawberry-qt6
-      signal-desktop-beta
     ];
   };
 

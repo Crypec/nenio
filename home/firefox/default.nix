@@ -1,6 +1,8 @@
 {
-  inputs,
+  config,
   pkgs,
+  nur,
+  inputs,
   ...
 }: {
   imports = [];
@@ -9,12 +11,12 @@
     enable = true;
     profiles = {
       default = {
-        extensions = with inputs.nur.repos.rycee.firefox-addons; [
-          ublock-origin
-          bitwarden
-          darkreader
-          vimium
-        ];
+        # extensions = with nur.repos.rycee.firefox-addons; [
+        #   ublock-origin
+        #   bitwarden
+        #   darkreader
+        #   vimium
+        # ];
 
         id = 0;
         name = "default";

@@ -25,6 +25,7 @@
         vi = "hx";
         vim = "hx";
         nano = "hx";
+        tree = "exa --tree";
       };
     };
 

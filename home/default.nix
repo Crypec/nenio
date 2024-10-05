@@ -4,6 +4,8 @@
     ./helix
     ./shell
     ./git
+    ./neomutt
+    ./rbw
 
     ./sway
     ./firefox

@@ -11,8 +11,12 @@
       mbox_type = "Maildir";
       sort = "threads";
       sort_aux = "reverse-last-date-received";
-      editor = "vim";
+
     };
+
+    editor = "hx";
+    vimKeys = true;
+
 
     # Sidebar settings
     sidebar = {

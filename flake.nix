@@ -29,7 +29,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    musnix = {url = "github:musnix/musnix";};
+    musnix.url = "github:musnix/musnix";
 
     nix-mineral = {
       url = "github:crypec/nix-mineral";
@@ -98,10 +98,10 @@
           }
         ];
       };
-      dune = nixpkgs.lib.nixosSystem {
+      sate = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/dune
+          ./hosts/sate
           ./modules/virtualisation
 
           agenix.nixosModules.default

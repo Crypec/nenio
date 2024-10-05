@@ -143,27 +143,24 @@
   };
 
   home.packages = with pkgs; [
-    # swaybg
-    tofi
-
     alacritty
     pavucontrol
     thunderbird
-    # firefox
     chromium
-    wl-clipboard
-    wdisplays
     strawberry-qt6
     signal-desktop-beta
-    gurk-rs
     tor-browser
-    virt-manager
     jellyfin-media-player
+    virt-manager
 
+    gurk-rs
+    tofi
+
+    wl-clipboard
+    wdisplays # graphical output manager
     lxqt.lxqt-policykit
 
     # waypipe # forward application over ssh
-    # wdisplays # graphical output manager
     # wev # wayland event monitor
     wl-clipboard # cli tool to manage wayland clipboard
     # wl-mirror # emulation for “mirror display” mode
