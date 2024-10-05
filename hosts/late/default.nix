@@ -5,13 +5,83 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }: {
   imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
     ../../modules/base.nix
   ];
+
+  boot = {
+    kernelPackages = pkgs.linuxPackages_zen;
+
+    extraModulePackages = [];
+    kernelModules = ["kvm-amd"];
+
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+
+    initrd = {
+      enable = true;
+
+      systemd = {
+        enable = true;
+        emergencyAccess = true;
+      };
+
+      kernelModules = [];
+      availableKernelModules = [
+        "nvme"
+        "xhci_pci"
+        "ahci"
+        "usbhid"
+        "sd_mod"
+      ];
+
+      luks.devices."nixos".device = "/dev/disk/by-uuid/a5d2ad09-d2e1-4ffc-a890-cc4ba37a6a35";
+    };
+
+    swraid = {
+      enable = true;
+
+      mdadmConf = ''
+        ARRAY /dev/md0 level=raid1 num-devices=2 metadata=1.2 name=nixos:0 UUID=363d2583:3d7916b0:9994ddf9:e8ad978d devices=/dev/nvme0n1p2,/dev/nvme1n1p2
+        MAILADDR mdadm@ctx.dev
+      '';
+    };
+  };
+
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/ed6881af-f2fb-48ee-849b-ffd9e35d2935";
+    fsType = "ext4";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/5DA5-D18A";
+    fsType = "vfat";
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+    ];
+  };
+
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 64 * 1024; # 64GB
+    }
+  ];
+
+  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+  # (the default) this is the recommended approach. When using systemd-networkd it's
+  # still possible to use this option, but it's recommended to use it in conjunction
+  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+  networking.useDHCP = lib.mkForce true;
+
+  # nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.amd.updateMicrocode = true;
 
   networking = {
     hostName = "date";
@@ -19,7 +89,7 @@
 
     networkmanager = {
       enable = true;
-      wifi.backend = "wpa_supplicant";
+      wifi.backend = "iwd";
     };
   };
 
@@ -48,22 +118,6 @@
   # };
 
   # Use the systemd-boot EFI boot loader.
-  boot = {
-    kernelPackages = pkgs.linuxPackages_zen;
-    loader = {
-      systemd-boot = {
-        enable = true;
-      };
-      efi.canTouchEfiVariables = true;
-    };
-    initrd = {
-      enable = true;
-      systemd = {
-        enable = true;
-        emergencyAccess = true;
-      };
-    };
-  };
 
   # age.secrets.disk-data.file = ../../../secrets/disk-data.age;
   # systemd.services.bcachefs-unlock-and-mount-data = {
@@ -113,13 +167,12 @@
   # Environment variables
 
   # Force wayland when possible
+  # Fix disappearing cursor on Hyprland
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     WLR_NO_HARDWARE_CURSORS = "1";
     WLR_RENDERER = "vulkan";
   };
-
-  # Fix disappearing cursor on Hyprland
 
   hardware = {
     enableRedistributableFirmware = true;
@@ -144,7 +197,6 @@
       powerManagement.enable = false;
       powerManagement.finegrained = false;
       open = true;
-      # package = config.boot.kernelPackages.nvidiaPackages.beta;
     };
   };
 
@@ -153,14 +205,11 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
-  #console = {
-  #  font = "Lat2-Terminus16";
-  #  keyMap = "us";
-  #  useXkbConfig = true; # use xkb.options in tty.
-  #};
-
-  # Enable the X11 windowing system.
-  #services.xserver.enable = true;
+  # console = {
+  #   # font = "Lat2-Terminus16";
+  #   keyMap = "us";
+  #   useXkbConfig = true; # use xkb.options in tty.
+  # };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

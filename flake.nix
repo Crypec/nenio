@@ -86,19 +86,43 @@
           }
         ];
       };
-      late = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/date
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
 
-            home-manager.users.simon = import ./home;
+      late = nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+        specialArgs = {inherit inputs;};
+        modules = [
+          agenix.nixosModules.default
+          nixos-hardware.nixosModules.msi-b550-a-pro
+          home-manager.nixosModules.home-manager
+          stylix.nixosModules.stylix
+          inputs.musnix.nixosModules.musnix
+          nur.nixosModules.nur
+
+          ./hosts/late
+          ./modules/mineral
+          ./modules/gui
+          ./modules/virtualisation
+          ./modules/stylix
+          ./modules/musnix
+          ./modules/yubikey
+
+          ./modules/polkit
+          ./modules/udev
+
+          ./users/simon.nix
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+
+              extraSpecialArgs = {inherit inputs;};
+
+              backupFileExtension = "hm.bk";
+            };
           }
         ];
       };
+
       sate = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [

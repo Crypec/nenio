@@ -11,7 +11,7 @@
     enable = true;
     profiles = {
       default = {
-        # extensions = with nur.repos.rycee.firefox-addons; [
+        # extensions = with config.nur.repos.rycee.firefox-addons; [
         #   ublock-origin
         #   bitwarden
         #   darkreader
