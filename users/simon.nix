@@ -67,6 +67,7 @@
             primary = true;
 
             userName = "simon.kunz@systemli.org";
+            passwordCommand = "rbw get ${address}";
 
             imap.host = "mail.systemli.org";
             smtp.host = "mail.systemli.org";
@@ -76,10 +77,12 @@
               enable = true;
               create = "maildir";
             };
-
             neomutt.enable = true;
 
-            passwordCommand = "rbw get ${address}";
+            gpg = {
+              encryptByDefault = true;
+              signByDefault = true;
+            };
           };
         };
       };

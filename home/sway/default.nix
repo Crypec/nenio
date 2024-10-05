@@ -140,6 +140,7 @@
 
   services.mako = {
     enable = true;
+    defaultTimeout = 1000;
   };
 
   home.packages = with pkgs; [

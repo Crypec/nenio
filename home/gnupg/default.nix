@@ -1,5 +1,4 @@
-{...}:
-{
+{...}: {
   programs.gpg = {
     enable = true;
     mutableKeys = false;
@@ -94,7 +93,7 @@
       # Show expired subkeys
       #list-options show-unusable-subkeys
       # Verbose output
-      #verbose      
+      #verbose
     };
   };
 }
