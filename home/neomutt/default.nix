@@ -9,12 +9,11 @@
   programs.mujmap.enable = true;
 
   programs.notmuch = {
-      enable = false;
-      hooks = {
-        preNew = "mbsync --all";
-      };
+    enable = true;
+    hooks = {
+      preNew = "mbsync --all";
+    };
   };
-
 
   programs = {
     neomutt = {
@@ -30,7 +29,6 @@
 
       editor = "hx";
       vimKeys = true;
-
 
       # Sidebar settings
       sidebar = {

@@ -26,7 +26,11 @@
   };
 
   # Home-manager configuration
-  home-manager.users.simon = {pkgs, ...}: {
+  home-manager.users.simon = {
+    pkgs,
+    config,
+    ...
+  }: {
     home = {
       username = "simon";
       homeDirectory = "/home/simon";
@@ -37,28 +41,53 @@
       packages = with pkgs; [];
     };
 
-    # Import the home-manager configuration
-    imports = [../home];
+    accounts = {
+      calendar = {
+        basePath = "${config.home.homeDirectory}/.local/share/calendars";
+        accounts.primary = {
+          primary = true;
+          remote = {
+            type = "caldav";
+            url = "https://baikal.ctx.dev/dav.php/";
+            userName = "simon@ctx.dev";
+            passwordCommand = ["rbw get baikal.ctx.dev" ];
+          };
+          vdirsyncer.enable = true;
+          qcal.enable = true;
+          khal.enable = true;
+        };
+      };
+      email = {
+        maildirBasePath = "${config.home.homeDirectory}/.local/share/mail/";
+        accounts = {
+          systemli = rec {
+            address = "simon.kunz@systemli.org";
+            realName = "Simon Kunz";
 
-    accounts.email.accounts = {
-      systemli = rec {
-        address = "simon.kunz@systemli.org";
-        realName = "Simon Kunz";
-        primary = true;
+            primary = true;
 
+            userName = "simon.kunz@systemli.org";
 
-        mbsync.enable = true;
-        notmuch.neomutt.enable = true;
-        notmuch.enable = true;
-        neomutt.enable = false;
+            imap.host = "mail.systemli.org";
+            smtp.host = "mail.systemli.org";
 
-        userName = "${address}";
-        imap.host = "mail.systemli.org";
-        passwordCommand = "rbw get ${address}";
+            notmuch.enable = true;
+            mbsync = {
+              enable = true;
+              create = "maildir";
+            };
+
+            neomutt.enable = true;
+
+            passwordCommand = "rbw get ${address}";
+          };
+        };
       };
     };
-  };
 
+    # Import the home-manager configuration
+    imports = [../home];
+  };
 
   nix.settings.trusted-users = ["simon"];
 }
