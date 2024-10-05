@@ -47,4 +47,6 @@
     # Import your home-manager configuration
     imports = [../home];
   };
+
+  nix.settings.trusted-users = ["simon"];
 }

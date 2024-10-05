@@ -1,10 +1,21 @@
-{pkgs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [];
 
   programs.firefox = {
     enable = true;
     profiles = {
       default = {
+        extensions = with inputs.nur.repos.rycee.firefox-addons; [
+          ublock-origin
+          bitwarden
+          darkreader
+          vimium
+        ];
+
         id = 0;
         name = "default";
         isDefault = true;

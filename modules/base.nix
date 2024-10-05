@@ -6,8 +6,6 @@
   alejandra,
   ...
 }: {
-  # ============================= User related =============================
-
   # use the much newer nftables instead of the old iptables
   networking.nftables.enable = true;
 
@@ -27,38 +25,6 @@
     enable = false;
     enableNg = true;
   };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.users.simon = {
-  #   isNormalUser = true;
-  #   description = "Simon";
-
-  #   shell = pkgs.nushell;
-
-  #   extraGroups = [
-  #     "networkmanager"
-  #     "wheel"
-  #     "libvirtd"
-  #     "audio"
-  #     "input"
-  #   ];
-
-  #   packages = with pkgs; [
-  #     alacritty
-  #     eza
-
-  #     thunderbird
-  #     neomutt
-  #     chromium
-  #     strawberry-qt6
-  #     signal-desktop-beta
-  #   ];
-  # };
-
-  # given the users in this list the right to specify additional substituters via:
-  #    1. `nixConfig.substituers` in `flake.nix`
-  #    2. command line args `--options substituers http://xxx`
-  # nix.settings.trusted-users = [username];
 
   # customise /etc/nix/nix.conf declaratively via `nix.settings`
   nix.settings = {
@@ -161,9 +127,6 @@
   };
 
   services.fwupd.enable = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
 
   environment.defaultPackages = with pkgs;
     lib.mkForce [

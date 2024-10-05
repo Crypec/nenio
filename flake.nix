@@ -32,15 +32,18 @@
     musnix = {url = "github:musnix/musnix";};
 
     nix-mineral = {
-      url = "github:crypec/nix-mineral"; # Refers to the main branch and is updated to the latest commit when you use "nix flake update"
+      url = "github:crypec/nix-mineral";
       flake = false;
     };
+
+    nur.url = github:nix-community/NUR;
   };
 
   outputs = inputs @ {
     self,
     nixpkgs,
     nixos-hardware,
+    nur,
     home-manager,
     agenix,
     stylix,
@@ -57,6 +60,7 @@
           home-manager.nixosModules.home-manager
           stylix.nixosModules.stylix
           inputs.musnix.nixosModules.musnix
+          nur.nixosModules.nur
 
           ./hosts/date
           ./modules/mineral
