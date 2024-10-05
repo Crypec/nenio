@@ -4,6 +4,7 @@
     ./helix
     ./shell
     ./git
+    ./gnupg
     ./neomutt
     ./rbw
     ./vdirsyncer
