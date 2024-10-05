@@ -69,6 +69,8 @@
           ./modules/stylix
           ./modules/musnix
           ./modules/yubikey
+          ./modules/gnupg
+
           ./modules/polkit
           ./modules/udev
 
