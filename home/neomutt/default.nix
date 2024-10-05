@@ -3,26 +3,41 @@
   config,
   ...
 }: {
-  programs.neomutt = {
-    enable = true;
 
-    # Basic settings
-    settings = {
-      mbox_type = "Maildir";
-      sort = "threads";
-      sort_aux = "reverse-last-date-received";
+  programs.mbsync.enable = true;
+  programs.msmtp.enable = true; 
+  programs.mujmap.enable = true;
 
-    };
-
-    editor = "hx";
-    vimKeys = true;
+  programs.notmuch = {
+      enable = false;
+      hooks = {
+        preNew = "mbsync --all";
+      };
+  };
 
 
-    # Sidebar settings
-    sidebar = {
+  programs = {
+    neomutt = {
       enable = true;
-      width = 30;
-      format = "%B%?F? [%F]?%* %?N?%N/?%S";
+
+      # Basic settings
+      settings = {
+        mbox_type = "Maildir";
+        sort = "threads";
+        sort_aux = "reverse-last-date-received";
+
+      };
+
+      editor = "hx";
+      vimKeys = true;
+
+
+      # Sidebar settings
+      sidebar = {
+        enable = true;
+        width = 30;
+        format = "%B%?F? [%F]?%* %?N?%N/?%S";
+      };
     };
   };
 }

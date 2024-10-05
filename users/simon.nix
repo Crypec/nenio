@@ -37,9 +37,20 @@
       packages = with pkgs; [];
     };
 
-    # Import your home-manager configuration
+    # Import the home-manager configuration
     imports = [../home];
+
+    accounts.email.accounts = {
+      systemli = {
+        address = "simon.kunz@systemli.org";
+        realName = "Simon Kunz";
+        primary = true;
+
+        userName = "simon.kunz";
+      };
+    };
   };
+
 
   nix.settings.trusted-users = ["simon"];
 }
