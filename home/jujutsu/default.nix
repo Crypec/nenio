@@ -1,5 +1,4 @@
-{pkgs, ...}:
-{
+{pkgs, ...}: {
   programs.jujutsu = {
     enable = true;
     settings = {
@@ -8,8 +7,12 @@
         name = ".ctx";
       };
       ui = {
-        diff.tool = ["difft", "--color=always", "$left", "$right"];
+        diff.tool = ["difft" "--color=always" "$left" "$right"];
       };
-    }
+    };
   };
+
+  home.packages = with pkgs; [
+    difftastic
+  ];
 }

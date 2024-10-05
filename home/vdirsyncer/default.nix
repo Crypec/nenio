@@ -1,5 +1,4 @@
-{pkgs, ...}:
-{
+{pkgs, ...}: {
   programs.vdirsyncer = {
     enable = true;
   };

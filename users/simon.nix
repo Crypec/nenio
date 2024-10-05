@@ -50,7 +50,7 @@
             type = "caldav";
             url = "https://baikal.ctx.dev/dav.php/";
             userName = "simon@ctx.dev";
-            passwordCommand = ["rbw get baikal.ctx.dev" ];
+            passwordCommand = ["rbw get baikal.ctx.dev"];
           };
           vdirsyncer.enable = true;
           qcal.enable = true;

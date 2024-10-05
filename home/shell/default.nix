@@ -1,4 +1,8 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   imports = [];
 
   # alacritty - a cross-platform, GPU-accelerated terminal emulator

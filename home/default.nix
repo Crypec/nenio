@@ -8,6 +8,8 @@
     ./rbw
     ./vdirsyncer
 
+    ./jujutsu
+
     ./sway
     ./firefox
   ];
