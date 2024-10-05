@@ -9,8 +9,8 @@
   ...
 }: {
   imports = [
-    ../../modules/base.nix
     ./disks.nix
+    ../../modules/base.nix
   ];
 
   boot = {
@@ -50,28 +50,20 @@
     }
   ];
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkForce true;
-
   # nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = true;
+  hardware.cpu.intel.updateMicrocode = true;
 
   networking = {
     hostName = "late";
     domain = "ctx.dev";
+
+    useDHCP = true;
 
     networkmanager = {
       enable = true;
       wifi.backend = "iwd";
     };
   };
-
-  systemd.tmpfiles.rules = [
-    "d /data 0750 root root"
-  ];
 
   nix.settings.system-features = [
     "benchmark"
@@ -92,44 +84,6 @@
   #     system = "x86_64-linux";
   #   };
   # };
-
-  # Use the systemd-boot EFI boot loader.
-
-  # age.secrets.disk-data.file = ../../../secrets/disk-data.age;
-  # systemd.services.bcachefs-unlock-and-mount-data = {
-  #   enable = true;
-  #   description = "Unlock and mount /data partition";
-
-  #   wantedBy = [ "multi-user.target" ];
-  #   after = [ "local-fs.target" ];
-  #   wants = [ "local-fs.target" ];
-
-  #   serviceConfig = {
-  #     Type = "oneshot";
-  #     RemainAfterExit = true;
-  #     ExecStart = pkgs.writeShellScript "bcachefs-unlock-mount" ''
-  #       DEV_IDENT="/dev/disks/by-uuid/293ff970-3751-426f-be12-453929466b83"
-  #       MOUNT_POINT="/data"
-
-  #       if ${pkgs.bcachefs-tools}/bin/bcachefs unlock --key-file="${config.age.secrets.disk-data.path}" "$DEV_IDENT"; then
-  #         echo "Successfully unlocked bcachefs partition"
-  #         if ${pkgs.util-linux}/bin/mount -t bcachefs "/dev/disk/by-label/$DEVICE_LABEL" "$MOUNT_POINT"; then
-  #           echo "Successfully mounted bcachefs partition to $MOUNT_POINT"
-  #         else
-  #           echo "Failed to mount bcachefs partition"
-  #           exit 1
-  #         fi
-  #       else
-  #         echo "Failed to unlock bcachefs partition"
-  #         exit 1
-  #       fi
-  #     '';
-  #     ExecStop = "${pkgs.util-linux}/bin/umount /data";
-  #   };
-  # };
-
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -176,17 +130,6 @@
     };
   };
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  # console = {
-  #   # font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -194,11 +137,6 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

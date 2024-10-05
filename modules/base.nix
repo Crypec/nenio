@@ -18,7 +18,11 @@
     };
   };
 
-  console.keyMap = "us";
+  console = {
+    keyMap = "us";
+    useXpbConfig = true;
+    earlySetup = true;
+  };
 
   # use a new reworked configuration switcher
   system.switch = {
