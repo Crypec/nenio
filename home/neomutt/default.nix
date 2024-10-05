@@ -3,9 +3,8 @@
   config,
   ...
 }: {
-
   programs.mbsync.enable = true;
-  programs.msmtp.enable = true; 
+  programs.msmtp.enable = true;
   programs.mujmap.enable = true;
 
   programs.notmuch = {
@@ -24,7 +23,6 @@
         mbox_type = "Maildir";
         sort = "threads";
         sort_aux = "reverse-last-date-received";
-
       };
 
       editor = "hx";
@@ -34,7 +32,6 @@
       sidebar = {
         enable = true;
         width = 30;
-        format = "%B%?F? [%F]?%* %?N?%N/?%S";
       };
     };
   };

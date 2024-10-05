@@ -1,6 +1,6 @@
 {pkgs, ...}:
 {
-  program.vdirsyncer = {
-    enbale = true;
+  programs.vdirsyncer = {
+    enable = true;
   };
 }

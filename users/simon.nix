@@ -83,6 +83,16 @@
           };
         };
       };
+      contact = {
+        accounts.primary = {
+          remote = {
+            type = "carddav";
+            url = "https://baikal.ctx.dev";
+            userName = "simon@ctx.dev";
+            passwordCommand = "rbw get baikal.ctx.dev";
+          };
+        };
+      };
     };
 
     # Import the home-manager configuration

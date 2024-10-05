@@ -140,6 +140,11 @@
     jujutsu
     git
 
+    rustup
+
+    ripgrep
+    fzf
+
     btop # better htop alternative
     tokei # count lines of code
 

@@ -6,6 +6,7 @@
     ./git
     ./neomutt
     ./rbw
+    ./vdirsyncer
 
     ./sway
     ./firefox

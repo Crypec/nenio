@@ -1,14 +1,10 @@
-{...}: {
+{pkgs, config, ...}: {
   imports = [];
 
   # alacritty - a cross-platform, GPU-accelerated terminal emulator
   programs = {
     nushell = {
       enable = true;
-
-      # configFile.text = "
-      #   show_banner: false
-      # ";
 
       configFile = {
         text = ''
@@ -44,6 +40,9 @@
         #   error_symbol = "[➜](bold red)";
         # };
       };
+    };
+    zoxide = {
+      enable = true;
     };
   };
 }
