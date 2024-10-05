@@ -1,58 +1,42 @@
 {lib, ...}: {
   disko.devices.disk = {
-    one = {
+    nvme0n1 = {
       type = "disk";
-      device = "/dev/sda";
+      device = "/dev/nvme0n1";
       content = {
         type = "gpt";
         partitions = {
           boot = {
-            size = "500M";
+            size = "2G";
             type = "EF00";
+
             content = {
-              type = "mdraid";
-              name = "boot";
+              type = "filesystem";
+              format = "vfat";
+              mountpoint = "/boot";
+              mountOptions = [
+                "umask=0077"
+                "dmask=0077"
+              ];
             };
           };
           primary = {
             size = "100%";
             content = {
-              type = "lvm_pv";
-              vg = "pool";
+              type = "luks";
+              name = "nixos";
+              askPassword = true;
+              initrdUnlock = true;
+
+              settings.allowDiscards = true;
+
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/";
+              };
             };
           };
-        };
-      };
-    };
-  };
-
-  disko.devices.mdadm = {
-    boot = {
-      type = "mdadm";
-      level = 1;
-      metadata = "1.2";
-      content = {
-        type = "filesystem";
-        format = "vfat";
-        mountpoint = "/boot";
-      };
-    };
-    md0 = {
-      type = "mdadm";
-      level = 1;
-      content = {
-        type = "luks";
-        name = "crypted";
-        settings = {
-          # disable settings.keyFile if you want to use interactive password entry
-          #passwordFile = "/tmp/secret.key"; # Interactive        settings = {
-          allowDiscards = true;
-          # keyFile = "/tmp/secret.key";
-        };
-        content = {
-          type = "filesystem";
-          format = "ext4";
-          mountpoint = "/";
         };
       };
     };

@@ -129,6 +129,8 @@
           ./hosts/sate
           ./modules/virtualisation
 
+          ./users/simon.nix
+
           agenix.nixosModules.default
           home-manager.nixosModules.home-manager
           {
