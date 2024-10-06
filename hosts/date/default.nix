@@ -10,7 +10,12 @@
 }: {
   imports = [
     ../../modules/base.nix
+    ../../modules/gui
   ];
+
+  # settings.system = {
+  #   isHeadless = false;
+  # };
 
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
@@ -80,7 +85,7 @@
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkForce true;
 
-  # nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  # nixpkgs.hostPlatform = lib.mkDefaul "x86_64-linux-v3";
   hardware.cpu.amd.updateMicrocode = true;
 
   networking = {
@@ -105,17 +110,13 @@
     "gccarch-znver3"
   ];
 
-  nixpkgs = {
-    localSystem = {
-      system = "x86_64-linux";
-      config = "znver3";
-    };
-    hostPlatform = {
-      gcc.arch = "znver3";
-      gcc.tune = "znver3";
-      system = "x86_64-linux";
-    };
-  };
+  # nixpkgs = {
+  #   hostPlatform = {
+  #     gcc.arch = "znver3";
+  #     gcc.tune = "znver3";
+  #     system = "x86_64-linux";
+  #   };
+  # };
 
   # Use the systemd-boot EFI boot loader.
 

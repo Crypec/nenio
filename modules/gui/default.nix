@@ -4,6 +4,10 @@
   lib,
   ...
 }: {
+  imports = [
+    ../stylix
+    ../musnix
+  ];
   hardware.wooting.enable = true;
 
   services = {

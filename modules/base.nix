@@ -19,8 +19,7 @@
   };
 
   console = {
-    keyMap = "us";
-    useXpbConfig = true;
+    useXkbConfig = true;
     earlySetup = true;
   };
 
@@ -31,24 +30,29 @@
   };
 
   # customise /etc/nix/nix.conf declaratively via `nix.settings`
-  nix.settings = {
-    # enable flakes globally
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+  nix = {
+    settings = {
+      # enable flakes globally
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      warn-dirty = false;
 
-    substituters = [];
+      # registry.nixpkgs.flake = inputs.nixpkgs;
 
-    trusted-public-keys = [];
-    builders-use-substitutes = true;
-  };
+      substituters = [];
 
-  # do garbage collection weekly to keep disk usage low
-  nix.gc = {
-    automatic = true;
-    dates = "daily";
-    options = "--delete-older-than 31d";
+      trusted-public-keys = [];
+      builders-use-substitutes = true;
+    };
+
+    # do garbage collection weekly to keep disk usage low
+    gc = {
+      automatic = true;
+      dates = "daily";
+      options = "--delete-older-than 31d";
+    };
   };
 
   # Set your time zone.

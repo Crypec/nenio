@@ -64,14 +64,11 @@
 
           ./hosts/date
           ./modules/mineral
-          ./modules/gui
+
           ./modules/virtualisation
-          ./modules/stylix
-          ./modules/musnix
           ./modules/yubikey
 
           ./modules/polkit
-          ./modules/udev
 
           ./users/simon.nix
           {
@@ -103,11 +100,9 @@
           ./modules/gui
           ./modules/virtualisation
           ./modules/stylix
-          ./modules/musnix
           ./modules/yubikey
 
           ./modules/polkit
-          ./modules/udev
 
           ./users/simon.nix
           {
