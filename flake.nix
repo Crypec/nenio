@@ -21,12 +21,13 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    agenix = {
-      url = "github:ryantm/agenix";
+    ragenix = {
+      url = "github:/yaxitech/ragenix";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-      # optionally choose not to download darwin deps (saves some resources on Linux)
-      inputs.darwin.follows = "";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
     };
 
     alejandra = {
@@ -44,34 +45,36 @@
     nur.url = github:nix-community/NUR;
   };
 
-  outputs = inputs @ {
+  outputs = {
     self,
     nixpkgs,
     nixos-hardware,
     disko,
     nur,
     home-manager,
-    agenix,
+    ragenix,
+    sops-nix,
     stylix,
     alejandra,
     ...
-  }: {
+  }@inputs: {
     nixosConfigurations = {
       date = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         specialArgs = {inherit inputs;};
         modules = [
-          agenix.nixosModules.default
+          disko.nixosModules.disko
           nixos-hardware.nixosModules.msi-b550-a-pro
           home-manager.nixosModules.home-manager
           stylix.nixosModules.stylix
           inputs.musnix.nixosModules.musnix
           nur.nixosModules.nur
+          sops-nix.nixosModules.sops
 
           ./hosts/date
           ./modules/mineral
 
-          ./modules/virtualisation
+          ./modules/libvirt
           ./modules/yubikey
 
           ./modules/polkit
@@ -95,7 +98,6 @@
         system = "x86_64-linux";
         specialArgs = {inherit inputs;};
         modules = [
-          agenix.nixosModules.default
           nixos-hardware.nixosModules.msi-b550-a-pro
           home-manager.nixosModules.home-manager
           stylix.nixosModules.stylix
@@ -105,7 +107,7 @@
           ./hosts/late
           ./modules/mineral
           ./modules/gui
-          ./modules/virtualisation
+          ./modules/libvirt
           ./modules/stylix
           ./modules/yubikey
 
@@ -134,7 +136,6 @@
           ./hosts/sate
           ./users/simon.nix
 
-          agenix.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;

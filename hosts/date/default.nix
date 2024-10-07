@@ -9,6 +9,7 @@
   ...
 }: {
   imports = [
+    ./disks.nix
     ../../modules/graphical
   ];
 

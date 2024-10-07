@@ -6,6 +6,10 @@
   alejandra,
   ...
 }: {
+  imports = [
+    ./sops-nix
+  ];
+  
   # use the much newer nftables instead of the old iptables
   networking.nftables.enable = true;
 
@@ -43,6 +47,8 @@
         "nix-command"
         "flakes"
       ];
+      system-features = [ "recursive-nix" ];
+
       warn-dirty = false;
 
       substituters = [];
@@ -57,6 +63,7 @@
       dates = "daily";
       options = "--delete-older-than 31d";
     };
+
   };
 
   # Set your time zone.
@@ -119,7 +126,6 @@
 
     lm_sensors
 
-    inputs.agenix.packages."${system}".default
     inputs.alejandra.defaultPackage.${system}
   ];
 }

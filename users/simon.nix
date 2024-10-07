@@ -5,6 +5,7 @@
   inputs,
   ...
 }: {
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.simon = {
     isNormalUser = true;
@@ -13,11 +14,12 @@
     shell = pkgs.nushell;
 
     extraGroups = [
-      "networkmanager"
       "wheel"
-      "libvirtd"
       "audio"
-      "input"
+      (lib.mkIf config.networking.networkmanager.enable "networkmanager")
+      (lib.mkIf config.hardware.wooting.enable "input")
+			(lib.mkIf config.virtualisation.docker.enable "docker")
+			(lib.mkIf config.virtualisation.libvirtd.enable "libvirtd")
     ];
 
     openssh.authorizedKeys.keys = [
@@ -25,7 +27,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOIazPvidQMTZIUO7YIZXqsKBxABrBkK11/R9nHRo/1z simon@date"
     ];
 
-    # initialPassword = "test";
+    # passwordFile = config.age.secrets.simon-password.path;
 
     packages = with pkgs; [
       eza

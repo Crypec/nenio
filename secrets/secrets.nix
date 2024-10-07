@@ -1,10 +1,19 @@
 let
-  simon = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFIObEXlIhuWihDTjnjAbTwhwvBEWjnNsVkCL0Y/8QZv simon@date";
+  simon = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOgA5TKNxvXkIPO1CcrJl9SWMoZmDBxnlsBl4htCGcsz simon@date"
+  ];
 
-  date = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPJDyIr/FSz1cJdcoW69R+NrWzwGK/+3gJpqD1t8L2zE";
-  # system2 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKzxQgondgEYcLpcPdJLrTdNgZ2gznOHCAxMdaceTUT1";
-  # systems = [ system1 system2 ];
+  hosts = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJr4lPy807mOR6yWcdRjubgsxlQHmCzdmdS9hyRoRZ+d root@date"
+  ];
+
+  all = simon ++ hosts;
 in {
-  "passwords.age".publicKeys = [simon];
-  # "secret2.age".publicKeys = users ++ systems;
+
+  # host keys
+  "date.ctx.dev_host_ed25519.age".publicKeys = all;
+  "sate.ctx.dev_host_ed25519.age".publicKeys = all;
+  "late.ctx.dev_host_ed25519.age".publicKeys = all;
+
+  "simon_password.age".publicKeys = all;
 }
