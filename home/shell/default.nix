@@ -24,6 +24,7 @@
       shellAliases = {
         vi = "hx";
         vim = "hx";
+        nvim = "hx";
         nano = "hx";
         tree = "exa --tree";
       };

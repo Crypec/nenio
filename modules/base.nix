@@ -9,6 +9,9 @@
   # use the much newer nftables instead of the old iptables
   networking.nftables.enable = true;
 
+  # clean all files in `/tmp/` during boot
+  boot.tmp.cleanOnBoot = true;
+
   services.xserver = {
     xkb = {
       layout = "us";

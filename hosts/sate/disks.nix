@@ -2,7 +2,7 @@
   disko.devices.disk = {
     nvme0n1 = {
       type = "disk";
-      device = "/dev/nvme0n1";
+      device = "/dev/sda";
       content = {
         type = "gpt";
         partitions = {
@@ -31,7 +31,7 @@
     };
     nvme1n1 = {
       type = "disk";
-      device = "/dev/nvme1n1";
+      device = "/dev/sdb";
       content = {
         type = "gpt";
         partitions = {
