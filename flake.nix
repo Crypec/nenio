@@ -84,6 +84,7 @@
 
               extraSpecialArgs = {inherit inputs;};
 
+              users.simon = import ./home/graphical.nix;
               backupFileExtension = "hm.bk";
             };
           }
