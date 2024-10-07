@@ -1,4 +1,10 @@
-{lib, ...}: {
+{lib, sops, ...}: {
+
+  sops.secrets."date-secrets/root_disk_key" = {
+    sopsFile = ../secrets/date_secrets.sops;
+    format = "binary";
+  };
+
   disko.devices.disk = {
     nvme0n1 = {
       type = "disk";
@@ -67,7 +73,7 @@
       content = {
         type = "luks";
         name = "nixos";
-        askPassword = true;
+        passwordFile = sops.secrets.date-root-disk-key.path;
         extraFormatArgs = [
           "--iter-time 5"
           "--key-size 512"
