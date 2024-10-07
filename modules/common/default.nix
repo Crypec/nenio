@@ -11,6 +11,14 @@
     ../../secrets
   ];
 
+  # TODO(Simon): either learn how to use it or get rid of it
+  # programs.nh = {
+  #   enable = true;
+  #   clean.enable = true;
+  #   clean.extraArgs = "--keep-since 4d --keep 3";
+  #   # flake = "/etc/nixos/";
+  # };
+
   # use the much newer nftables instead of the old iptables
   networking.nftables.enable = true;
 
