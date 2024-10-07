@@ -9,7 +9,7 @@
   ...
 }: {
   imports = [
-    ./disks
+    ./disks.nix
     ../../modules/base.nix
   ];
 
@@ -40,7 +40,7 @@
           enable = true;
           port = 22;
           authorizedKeys = ["ssh-rsa AAAAyourpublic-key-here..."];
-          hostKeys = ["/etc/secrets/initrd/ssh_host_rsa_key"];
+          hostKeys = ["/etc/ssh/ssh_host_ed25519_key"];
         };
       };
 
@@ -80,7 +80,7 @@
     domain = "ctx.dev";
 
     networkmanager.enable = false;
-    useNetworkD = true;
+    useNetworkd = true;
   };
 
   systemd.network = {
@@ -88,7 +88,7 @@
     networks = {
       wan = {
         enable = true;
-        matchingConfig.Name = "enps0";
+        name = "enp1s0";
 
         networkConfig = {
           Address = "144.76.86.84/27"; # Replace with your desired static IP and subnet mask
@@ -169,7 +169,7 @@
   services.fstrim.enable = true;
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh.enable = lib.mkForce true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

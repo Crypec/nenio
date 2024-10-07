@@ -23,7 +23,7 @@
             size = "100%";
             content = {
               type = "mdraid";
-              name = "md0";
+              name = "cryptroot";
             };
           };
         };
@@ -52,7 +52,7 @@
             size = "100%";
             content = {
               type = "mdraid";
-              name = "md0";
+              name = "cryptroot";
             };
           };
         };
@@ -61,12 +61,11 @@
   };
 
   disko.devices.mdadm = {
-    md0 = {
+    cryptroot = {
       type = "mdadm";
       level = 1;
       content = {
         type = "luks";
-        device = "/dev/md0";
         name = "nixos";
         askPassword = true;
         extraFormatArgs = [

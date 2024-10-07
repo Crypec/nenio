@@ -14,6 +14,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     agenix = {
@@ -43,6 +48,7 @@
     self,
     nixpkgs,
     nixos-hardware,
+    disko,
     nur,
     home-manager,
     agenix,
@@ -120,10 +126,11 @@
 
       sate = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = {inherit inputs;};
         modules = [
-          ./hosts/sate
-          ./modules/virtualisation
+          disko.nixosModules.disko
 
+          ./hosts/sate
           ./users/simon.nix
 
           agenix.nixosModules.default
