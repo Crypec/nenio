@@ -72,7 +72,6 @@
           "--iter-time 10"
           "--key-size 512"
           "--hash sha512"
-          "--use-random"
         ];
         initrdUnlock = true;
         content = {

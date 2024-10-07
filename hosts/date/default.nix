@@ -44,8 +44,6 @@
         "sd_mod"
       ];
     };
-
-    swraid.enable = true;
   };
 
   swapDevices = [
