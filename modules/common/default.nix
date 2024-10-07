@@ -45,8 +45,6 @@
       ];
       warn-dirty = false;
 
-      registry.nixpkgs.flake = inputs.nixpkgs;
-
       substituters = [];
 
       trusted-public-keys = [];
@@ -84,16 +82,16 @@
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
 
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = false;
-    settings = {
-      X11Forwarding = true;
-      PermitRootLogin = "no"; # disable root login
-      PasswordAuthentication = false; # disable password login
-    };
-    openFirewall = false;
-  };
+  # # Enable the OpenSSH daemon.
+  # services.openssh = {
+  #   enable = false;
+  #   settings = {
+  #     X11Forwarding = true;
+  #     PermitRootLogin = "no"; # disable root login
+  #     PasswordAuthentication = false; # disable password login
+  #   };
+  #   openFirewall = false;
+  # };
 
   services.fwupd.enable = true;
 

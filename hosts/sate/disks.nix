@@ -23,7 +23,8 @@
             size = "100%";
             content = {
               type = "mdraid";
-              name = "cryptroot";
+              name = "md0";
+              # device = "/dev/md0";
             };
           };
         };
@@ -35,7 +36,7 @@
       content = {
         type = "gpt";
         partitions = {
-          ESP = {
+          esp = {
             size = "1G";
             type = "EF00";
             content = {
@@ -52,7 +53,7 @@
             size = "100%";
             content = {
               type = "mdraid";
-              name = "cryptroot";
+              name = "md0";
             };
           };
         };
@@ -61,7 +62,7 @@
   };
 
   disko.devices.mdadm = {
-    cryptroot = {
+    md0 = {
       type = "mdadm";
       level = 1;
       content = {

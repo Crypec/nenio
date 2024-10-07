@@ -1,5 +1,6 @@
 {...}:
 {
+  networking.firewall.enable = false;
   services.openssh = {
     enable  = true;
 
@@ -14,8 +15,8 @@
 
       PasswordAuthentication = false;
       X11Forwarding = false;
-      useDns = true;
-      strictModes =  true;
+      UseDns = true;
+      StrictModes =  true;
       PrintMotd = true;
     };
   };

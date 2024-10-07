@@ -12,6 +12,7 @@
     ./disks.nix
 
     ../../modules/common
+    ../../modules/sshd
   ];
 
   boot = {
@@ -66,12 +67,12 @@
     };
   };
 
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 128 * 1024; # 128GB
-    }
-  ];
+  # swapDevices = [
+  #   {
+  #     device = "/swapfile";
+  #     size = 128 * 1024; # 128GB
+  #   }
+  # ];
 
   # nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = true;
