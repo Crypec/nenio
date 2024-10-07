@@ -5,8 +5,8 @@
   ...
 }: {
   imports = [
-    ../tofi
-    ../waybar
+    ./tofi.nix
+    ./waybar.nix
   ];
 
   wayland.windowManager.sway = {
