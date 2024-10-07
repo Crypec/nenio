@@ -8,6 +8,5 @@
     ./rbw
 
     ./jujutsu
-    ./direnv.nix
   ];
 }

@@ -8,9 +8,11 @@
 }: {
 
 
-  sops.secrets.simon-password.neededForUsers = true;
+  sops.secrets.simon-password = {
+    sopsFile = ../secrets/simon-password.sops;
+    format = "binary";
+  };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.simon = {
     isNormalUser = true;
     description = "Simon";

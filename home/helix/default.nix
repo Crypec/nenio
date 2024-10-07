@@ -16,7 +16,6 @@
         cursorline = false;
 
         text-width = 120;
-        rulers = [120];
 
         lsp = {
           display-messages = false;

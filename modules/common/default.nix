@@ -7,7 +7,7 @@
   ...
 }: {
   imports = [
-    # ../sops-nix
+    ../../secrets
   ];
   
   # use the much newer nftables instead of the old iptables
