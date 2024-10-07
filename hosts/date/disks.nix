@@ -1,10 +1,5 @@
 {lib, sops, ...}: {
 
-  sops.secrets."date-secrets/root_disk_key" = {
-    sopsFile = ../secrets/date_secrets.sops;
-    format = "binary";
-  };
-
   disko.devices.disk = {
     nvme0n1 = {
       type = "disk";
