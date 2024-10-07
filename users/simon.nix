@@ -2,9 +2,13 @@
   config,
   pkgs,
   lib,
+  sops,
   inputs,
   ...
 }: {
+
+
+  sops.secrets.simon-password.neededForUsers = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.simon = {
@@ -27,7 +31,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOIazPvidQMTZIUO7YIZXqsKBxABrBkK11/R9nHRo/1z simon@date"
     ];
 
-    # passwordFile = config.age.secrets.simon-password.path;
+    hashedPasswordFile = config.sops.secrets.simon-password.path;
 
     packages = with pkgs; [
       eza
