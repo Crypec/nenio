@@ -57,7 +57,7 @@
     stylix,
     alejandra,
     ...
-  }@inputs: {
+  } @ inputs: {
     nixosConfigurations = {
       date = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";

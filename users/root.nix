@@ -1,5 +1,8 @@
-{config, sops, ...}:
 {
+  config,
+  sops,
+  ...
+}: {
   sops.secrets.root-password = {
     sopsFile = ../secrets/root-password.sops;
     format = "binary";

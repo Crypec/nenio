@@ -11,7 +11,7 @@
 
     ../../secrets
   ];
-  
+
   # use the much newer nftables instead of the old iptables
   networking.nftables.enable = true;
 
@@ -49,7 +49,7 @@
         "nix-command"
         "flakes"
       ];
-      system-features = [ "recursive-nix" ];
+      system-features = ["recursive-nix"];
 
       warn-dirty = false;
 
@@ -65,7 +65,6 @@
       dates = "daily";
       options = "--delete-older-than 31d";
     };
-
   };
 
   # Set your time zone.

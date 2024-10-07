@@ -6,8 +6,6 @@
   inputs,
   ...
 }: {
-
-
   sops.secrets.simon-password = {
     sopsFile = ../secrets/simon-password.sops;
     format = "binary";
@@ -24,8 +22,8 @@
       "audio"
       (lib.mkIf config.networking.networkmanager.enable "networkmanager")
       (lib.mkIf config.hardware.wooting.enable "input")
-			(lib.mkIf config.virtualisation.docker.enable "docker")
-			(lib.mkIf config.virtualisation.libvirtd.enable "libvirtd")
+      (lib.mkIf config.virtualisation.docker.enable "docker")
+      (lib.mkIf config.virtualisation.libvirtd.enable "libvirtd")
     ];
 
     openssh.authorizedKeys.keys = [
