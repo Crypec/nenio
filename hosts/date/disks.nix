@@ -2,7 +2,7 @@
   disko.devices.disk = {
     nvme0n1 = {
       type = "disk";
-      device = "/dev/sda";
+      device = "/dev/nvme0n1";
       content = {
         type = "gpt";
         partitions = {
@@ -24,7 +24,6 @@
             content = {
               type = "mdraid";
               name = "md0";
-              # device = "/dev/md0";
             };
           };
         };
@@ -32,7 +31,7 @@
     };
     nvme1n1 = {
       type = "disk";
-      device = "/dev/sdb";
+      device = "/dev/nvme1n1";
       content = {
         type = "gpt";
         partitions = {
@@ -70,10 +69,9 @@
         name = "nixos";
         askPassword = true;
         extraFormatArgs = [
-          "--iter-time 10"
+          "--iter-time 5"
           "--key-size 512"
           "--hash sha512"
-          "--use-random"
         ];
         initrdUnlock = true;
         content = {

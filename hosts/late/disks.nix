@@ -28,8 +28,6 @@
               askPassword = true;
               initrdUnlock = true;
 
-              settings.allowDiscards = true;
-
               content = {
                 type = "filesystem";
                 format = "ext4";

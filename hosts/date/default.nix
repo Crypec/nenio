@@ -43,32 +43,9 @@
         "usbhid"
         "sd_mod"
       ];
-
-      luks.devices."nixos".device = "/dev/disk/by-uuid/a5d2ad09-d2e1-4ffc-a890-cc4ba37a6a35";
     };
 
-    swraid = {
-      enable = true;
-
-      mdadmConf = ''
-        ARRAY /dev/md0 level=raid1 num-devices=2 metadata=1.2 name=nixos:0 UUID=363d2583:3d7916b0:9994ddf9:e8ad978d devices=/dev/nvme0n1p2,/dev/nvme1n1p2
-        MAILADDR mdadm@ctx.dev
-      '';
-    };
-  };
-
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/ed6881af-f2fb-48ee-849b-ffd9e35d2935";
-    fsType = "ext4";
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/5DA5-D18A";
-    fsType = "vfat";
-    options = [
-      "fmask=0077"
-      "dmask=0077"
-    ];
+    swraid.enable = true;
   };
 
   swapDevices = [
