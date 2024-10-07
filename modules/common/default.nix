@@ -7,6 +7,8 @@
   ...
 }: {
   imports = [
+    ../../users/root.nix
+
     ../../secrets
   ];
   
@@ -37,7 +39,7 @@
   };
 
   # enforce declarative user management
-  users.mutableUsers = true;
+  users.mutableUsers = false;
 
   # customise /etc/nix/nix.conf declaratively via `nix.settings`
   nix = {
