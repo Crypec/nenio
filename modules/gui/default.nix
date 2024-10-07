@@ -7,6 +7,7 @@
   imports = [
     ../stylix
     ../musnix
+    ../gnupg
   ];
   hardware.wooting.enable = true;
 

@@ -9,14 +9,16 @@
   ...
 }: {
   imports = [
+    ./disks
     ../../modules/base.nix
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_latest;
 
-    extraModulePackages = [];
+    kernelParams = ["ip=dhcp"];
     kernelModules = ["kvm-amd"];
+    extraModulePackages = [];
 
     loader = {
       systemd-boot.enable = true;
@@ -28,68 +30,72 @@
 
       systemd = {
         enable = true;
+        users.root.shell = "/bin/cryptsetup-askpass";
         emergencyAccess = true;
+      };
+
+      network = {
+        enable = true;
+        ssh = {
+          enable = true;
+          port = 22;
+          authorizedKeys = ["ssh-rsa AAAAyourpublic-key-here..."];
+          hostKeys = ["/etc/secrets/initrd/ssh_host_rsa_key"];
+        };
       };
 
       kernelModules = [];
       availableKernelModules = [
+        "igb"
         "nvme"
         "xhci_pci"
         "ahci"
         "usbhid"
         "sd_mod"
       ];
-
-      luks.devices."nixos".device = "/dev/disk/by-uuid/a5d2ad09-d2e1-4ffc-a890-cc4ba37a6a35";
     };
 
     swraid = {
       enable = true;
 
-      mdadmConf = ''
-        ARRAY /dev/md0 level=raid1 num-devices=2 metadata=1.2 name=nixos:0 UUID=363d2583:3d7916b0:9994ddf9:e8ad978d devices=/dev/nvme0n1p2,/dev/nvme1n1p2
-        MAILADDR mdadm@ctx.dev
-      '';
+      # mdadmConf = ''
+      #   ARRAY /dev/md0 level=raid1 num-devices=2 metadata=1.2 name=nixos:0 UUID=363d2583:3d7916b0:9994ddf9:e8ad978d devices=/dev/nvme0n1p2,/dev/nvme1n1p2
+      #   MAILADDR mdadm@ctx.dev
+      # '';
     };
-  };
-
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/ed6881af-f2fb-48ee-849b-ffd9e35d2935";
-    fsType = "ext4";
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/5DA5-D18A";
-    fsType = "vfat";
-    options = [
-      "fmask=0077"
-      "dmask=0077"
-    ];
   };
 
   swapDevices = [
     {
       device = "/swapfile";
-      size = 64 * 1024; # 64GB
+      size = 128 * 1024; # 128GB
     }
   ];
-
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkForce true;
 
   # nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = true;
 
   networking = {
-    hostName = "date";
+    hostName = "sate";
     domain = "ctx.dev";
 
-    networkmanager = {
-      enable = true;
-      wifi.backend = "iwd";
+    networkmanager.enable = false;
+    useNetworkD = true;
+  };
+
+  systemd.network = {
+    enable = true;
+    networks = {
+      wan = {
+        enable = true;
+        matchingConfig.Name = "enps0";
+
+        networkConfig = {
+          Address = "144.76.86.84/27"; # Replace with your desired static IP and subnet mask
+          Gateway = "144.76.86.65"; # Replace with your router's IP address
+          DNS = "8.8.8.8 1.1.1.1"; # Replace with your preferred DNS servers
+        };
+      };
     };
   };
 
@@ -162,67 +168,8 @@
 
   services.fstrim.enable = true;
 
-  services.xserver.videoDrivers = ["nvidia"];
-
-  # Environment variables
-
-  # Force wayland when possible
-  # Fix disappearing cursor on Hyprland
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    WLR_NO_HARDWARE_CURSORS = "1";
-    WLR_RENDERER = "vulkan";
-  };
-
-  hardware = {
-    enableRedistributableFirmware = true;
-
-    graphics = {
-      enable = true;
-      extraPackages = with pkgs; [
-        # trying to fix `WLR_RENDERER=vulkan` in sway
-        vulkan-validation-layers
-      ];
-    };
-    nvidia = {
-      package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
-        version = "560.35.03";
-        sha256_64bit = "sha256-8pMskvrdQ8WyNBvkU/xPc/CtcYXCa7ekP73oGuKfH+M=";
-        sha256_aarch64 = "sha256-s8ZAVKvRNXpjxRYqM3E5oss5FdqW+tv1qQC2pDjfG+s=";
-        openSha256 = "sha256-/32Zf0dKrofTmPZ3Ratw4vDM7B+OgpC4p7s+RHUjCrg=";
-        settingsSha256 = "sha256-kQsvDgnxis9ANFmwIwB7HX5MkIAcpEEAHc8IBOLdXvk=";
-        persistencedSha256 = "sha256-E2J2wYYyRu7Kc3MMZz/8ZIemcZg68rkzvqEwFAL3fFs=";
-      };
-      modesetting.enable = true;
-      powerManagement.enable = false;
-      powerManagement.finegrained = false;
-      open = true;
-    };
-  };
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  # console = {
-  #   # font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
