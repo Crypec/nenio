@@ -10,7 +10,7 @@
 }: {
   imports = [
     ./disks.nix
-    ../../modules/base.nix
+    ../../modules/graphical
   ];
 
   boot = {

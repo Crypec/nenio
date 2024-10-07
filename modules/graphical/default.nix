@@ -5,6 +5,8 @@
   ...
 }: {
   imports = [
+    ../common
+
     ../stylix
     ../musnix
     ../gnupg

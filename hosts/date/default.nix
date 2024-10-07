@@ -9,8 +9,7 @@
   ...
 }: {
   imports = [
-    ../../modules/base.nix
-    ../../modules/gui
+    ../../modules/graphical
   ];
 
   # settings.system = {
