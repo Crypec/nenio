@@ -33,7 +33,7 @@
   };
 
   # enforce declarative user management
-  users.mutableUsers = false;
+  users.mutableUsers = true;
 
   # customise /etc/nix/nix.conf declaratively via `nix.settings`
   nix = {

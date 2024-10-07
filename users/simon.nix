@@ -25,7 +25,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOIazPvidQMTZIUO7YIZXqsKBxABrBkK11/R9nHRo/1z simon@date"
     ];
 
-    initialPassword = "test";
+    # initialPassword = "test";
 
     packages = with pkgs; [
       eza

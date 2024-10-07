@@ -24,7 +24,6 @@
             content = {
               type = "mdraid";
               name = "md0";
-              # device = "/dev/md0";
             };
           };
         };
