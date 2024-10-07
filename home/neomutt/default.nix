@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{...}: {
   programs.mbsync.enable = true;
   programs.msmtp.enable = true;
   programs.mujmap.enable = true;

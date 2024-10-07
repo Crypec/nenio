@@ -13,7 +13,7 @@
     enable = true;
     package = pkgs.swayfx;
 
-    # FIXME(Simon): enable this again. This is just a dirty workaround to fix my nixos config
+    # FIXME(Simon): enable this again. This is just a workaround to fix my nixos config
     # FIXME(Simon): from not compiling with the `package = pkgs.swayfx` option set.
     checkConfig = false;
 
@@ -172,6 +172,7 @@
     XDG_SESSION_TYPE = "wayland";
     XDG_SESSION_DESKTOP = "sway";
     XDG_CURRENT_DESKTOP = "sway";
+    DISPLAY = ":0";
 
     WLR_RENDERER = "vulkan";
 

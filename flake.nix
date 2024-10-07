@@ -21,11 +21,6 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    ragenix = {
-      url = "github:/yaxitech/ragenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     sops-nix = {
       url = "github:Mic92/sops-nix";
     };
@@ -46,16 +41,13 @@
   };
 
   outputs = {
-    self,
     nixpkgs,
     nixos-hardware,
     disko,
     nur,
     home-manager,
-    ragenix,
     sops-nix,
     stylix,
-    alejandra,
     ...
   } @ inputs: {
     nixosConfigurations = {

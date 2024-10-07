@@ -3,7 +3,6 @@
   pkgs,
   lib,
   sops,
-  inputs,
   ...
 }: {
   sops.secrets.simon-password = {

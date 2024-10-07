@@ -1,8 +1,6 @@
 {
-  config,
   pkgs,
   nur,
-  inputs,
   ...
 }: {
   imports = [];
