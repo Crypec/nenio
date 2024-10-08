@@ -14,7 +14,7 @@
     isNormalUser = true;
     description = "Simon";
 
-    shell = pkgs.nushell;
+    shell = pkgs.zsh;
 
     extraGroups = [
       "wheel"

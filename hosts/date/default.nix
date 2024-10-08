@@ -139,16 +139,6 @@
 
   services.xserver.videoDrivers = ["nvidia"];
 
-  # Environment variables
-
-  # Force wayland when possible
-  # Fix disappearing cursor on Hyprland
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    WLR_NO_HARDWARE_CURSORS = "1";
-    WLR_RENDERER = "vulkan";
-  };
-
   hardware = {
     enableRedistributableFirmware = true;
 

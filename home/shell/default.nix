@@ -1,6 +1,7 @@
-{...}: {
+{pkgs, ...}: {
   imports = [
     ./direnv.nix
+    ./zsh.nix
   ];
 
   # alacritty - a cross-platform, GPU-accelerated terminal emulator
@@ -25,6 +26,7 @@
         nvim = "hx";
         nano = "hx";
         tree = "exa --tree";
+        cat = "bat";
       };
     };
 
@@ -78,6 +80,12 @@
     };
     zoxide = {
       enable = true;
+    };
+    bat = {
+      enable = true;
+      config = {
+        theme = "TwoDark";
+      };
     };
   };
 }
