@@ -6,11 +6,12 @@
     enable = true;
     defaultEditor = true;
     settings = {
-      theme = lib.mkForce "naysayer";
       editor = {
         auto-save = true;
-        true-color = true;
         auto-pairs = true;
+        auto-format = true;
+
+        true-color = true;
 
         undercurl = true;
         cursorline = false;

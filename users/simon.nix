@@ -5,10 +5,6 @@
   sops,
   ...
 }: {
-  sops.secrets.simon-password = {
-    sopsFile = ../secrets/simon-password.sops;
-    format = "binary";
-  };
 
   users.users.simon = {
     isNormalUser = true;
@@ -30,7 +26,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOIazPvidQMTZIUO7YIZXqsKBxABrBkK11/R9nHRo/1z simon@date"
     ];
 
-    hashedPasswordFile = config.sops.secrets.simon-password.path;
+    hashedPasswordFile = sops.secrets.simon-password.path;
 
     packages = with pkgs; [
       eza

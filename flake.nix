@@ -71,7 +71,7 @@
 
           ./modules/polkit
 
-          ./users/simon.nix
+          ./users
           {
             home-manager = {
               useGlobalPkgs = true;

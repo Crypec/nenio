@@ -3,9 +3,5 @@
   sops,
   ...
 }: {
-  sops.secrets.root-password = {
-    sopsFile = ../secrets/root-password.sops;
-    format = "binary";
-  };
-  users.users.root.hashedPasswordFile = config.sops.secrets.root-password.path;
+  users.users.root.hashedPasswordFile = sops.secrets.root-password.path;
 }

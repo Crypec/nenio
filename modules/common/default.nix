@@ -1,13 +1,12 @@
 {
   pkgs,
   lib,
+  sops,
   inputs,
   alejandra,
   ...
 }: {
   imports = [
-    ../../users/root.nix
-
     ../../secrets
   ];
 
@@ -45,8 +44,6 @@
     enableNg = true;
   };
 
-  # enforce declarative user management
-  users.mutableUsers = false;
 
   # customise /etc/nix/nix.conf declaratively via `nix.settings`
   nix = {

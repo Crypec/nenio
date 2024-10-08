@@ -4,8 +4,8 @@
   ...
 }: {
   sops = {
-    defaultSopsFile = ../secrets/secrets.yaml;
-    defaultSopsFormat = "yaml";
+    defaultSopsFile = ../secrets/secrets.json;
+    defaultSopsFormat = "json";
     age = {
       generateKey = true;
       sshKeyPaths = [
@@ -15,7 +15,9 @@
   };
 
   sops.secrets = {
-    # "date/root_disk_key" = {};
+    date_root_disk_key = {};
+    simon_user_password = {};
+    root_user_password = {};
   };
 
   environment.systemPackages = [

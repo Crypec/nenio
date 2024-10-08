@@ -1,6 +1,8 @@
 {...}: {
   imports = [
     ./common.nix
+    ./root.nix
+    ./simon.nix
   ];
 
   # Let Home Manager install and manage itself.
