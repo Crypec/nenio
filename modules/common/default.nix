@@ -8,6 +8,7 @@
 }: {
   imports = [
     ../../secrets
+    ../../users/root.nix
   ];
 
   # TODO(Simon): either learn how to use it or get rid of it

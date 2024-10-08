@@ -6,6 +6,11 @@
   ...
 }: {
 
+  imports = [
+    ../secrets
+  ];
+
+  sops.secrets.simon-password = {};
   users.users.simon = {
     isNormalUser = true;
     description = "Simon";

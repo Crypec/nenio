@@ -1,4 +1,4 @@
-{sops, ...}:
+{config, sops, ...}:
 {
   imports = [
     ./root.nix

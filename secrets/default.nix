@@ -15,9 +15,9 @@
   };
 
   sops.secrets = {
-    date_root_disk_key = {};
-    simon_user_password = {};
-    root_user_password = {};
+    # date_root_disk_key = {};
+    # simon_user_password = {};
+    # root_user_password = {};
   };
 
   environment.systemPackages = [

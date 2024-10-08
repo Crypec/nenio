@@ -81,11 +81,9 @@
     zoxide = {
       enable = true;
     };
+    ripgrep.enable = true;
     bat = {
       enable = true;
-      # config = {
-      #   theme = "TwoDark";
-      # };
     };
   };
 }
